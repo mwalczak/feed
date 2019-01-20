@@ -29,9 +29,8 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-
 $container['feedReader'] = function ($c) {
     $settings = $c->get('settings')['feed'];
-    $feedReader = new FeedReader($settings['url']);
+    $feedReader = new FeedReader($settings['url'], $settings['cache']);
     return $feedReader;
 };

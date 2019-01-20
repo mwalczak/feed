@@ -16,6 +16,11 @@ h1 {
     margin-bottom: 0;
 }
 
+#content {
+    width: auto;
+    text-align: center;
+}
+
 .product {
     float: left;
     border: 1px solid #719e40;

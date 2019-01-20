@@ -19,7 +19,8 @@ return [
 
         // Feed settings
         'feed' => [
-            'url' => 'http://a.cdn.searchspring.net/help/feeds/sample.xml'
+            'url' => 'http://a.cdn.searchspring.net/help/feeds/sample.xml',
+            'cache' => __DIR__ . '/../cache/feed.xml'
         ],
     ],
 ];
