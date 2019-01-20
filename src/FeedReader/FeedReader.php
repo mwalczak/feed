@@ -7,30 +7,38 @@
  */
 namespace FeedReader;
 
-use Sabre\Xml;
-
-class FeedReader extends Xml\Reader
+class FeedReader
 {
+    private $xml;
+
     private $url;
     private $cache;
+    private $productElement;
 
-    public function __construct($url, $cache = "")
+
+    public function __construct($url, $cache = "", $productElement = "")
     {
         $this->url = $url;
         $this->cache = $cache;
-        $this->fetch();
-        $this->elementMap = [
-            '{}Product' => function(Xml\Reader $reader) {
-                return Xml\Deserializer\keyValue($reader, '');
-            }
-        ];
+        $this->productElement = $productElement;
+
+        $this->xml = new \SimpleXMLElement($this->fetch());
     }
 
     public function getProducts(){
-        $parsedArray = $this->parse();
         $products = [];
-        foreach($parsedArray['value'] as $product){
-            $products[$product['value']['id']] = $product['value'];
+        /**
+         * @var $item \SimpleXMLElement
+         */
+        foreach($this->xml->channel->item as $item){
+            $product = [];
+            foreach($item->children("g", true) as $attribute=>$value){
+                $product[$attribute] = (string) $value;
+            }
+            foreach($item->children() as $attribute=>$value){
+                $product[$attribute] = (string) $value;
+            }
+            $products[$product['id']] = $product;
         }
 
         return $products;
@@ -43,13 +51,13 @@ class FeedReader extends Xml\Reader
 
     private function fetch($ignoreCache = false){
         if(is_file($this->cache) && !$ignoreCache){
-            $this->xml(file_get_contents($this->cache));
+            return file_get_contents($this->cache);
         } else {
             $contents = file_get_contents($this->url);
             if(!empty($this->cache)){
                 file_put_contents($this->cache, $contents);
             }
-            $this->xml($contents);
+            return $contents;
         }
     }
 

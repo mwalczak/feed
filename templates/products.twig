@@ -8,9 +8,10 @@
     {% for product in products %}
         <div class="product">
             <a href="{{ path_for('product', { 'id': product.id }) }}">
-                <p class="name">{{ product.name }}</p>
-                <p class="img"><img src="{{ product.image_url }}"/></p>
+                <p class="name">{{ product.title }}</p>
+                <p class="img"><img src="{{ product.image_link }}"/></p>
             </a>
+            <p class="price">Cena: <span>{{ product.price }}</span></p>
             <i class="material-icons">shopping_basket</i>
         </div>
     {% endfor %}

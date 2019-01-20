@@ -6,8 +6,9 @@
 <div class="product">
     <div class="product_id"></div>
     <a href="{{ path_for('product', { 'id': product.id }) }}">
-        <p class="name">{{ product.name }}</p>
-        <p class="img"><img src="{{ product.image_url }}"/></p>
+        <p class="name">{{ product.title }}</p>
+        <p class="img"><img src="{{ product.image_link }}"/></p>
+        <p class="price">Cena: <span>{{ product.price }}</span></p>
     </a>
     <p class="description">{{ product.description }}</p>
 </div>
