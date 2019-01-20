@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Products{% endblock %}
+{% block content %}
+<h1>Products page</h1>
+<h4>Total: {{ productsCount }} products!</h4>
+<div class="products">
+    {% for product in products %}
+        <div class="product">
+            <a href="{{ path_for('product', { 'id': product.id }) }}">
+                <p class="name">{{ product.name }}</p>
+                <p class="img"><img src="{{ product.image_url }}"/></p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

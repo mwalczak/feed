@@ -15,7 +15,7 @@ $app->get('/products', function (Request $request, Response $response, array $ar
     $args['products'] = $products;
     $args['productsCount'] = count($products);
 
-    return $this->renderer->render($response, 'products.phtml', $args);
+    return $this->renderer->render($response, 'products.twig', $args);
 });
 
 
@@ -31,7 +31,7 @@ $app->get('/product/{id}', function (Request $request, Response $response, array
     }
     $args['product'] = $product;
 
-    return $this->renderer->render($response, 'product.phtml', $args);
-});
+    return $this->renderer->render($response, 'product.twig', $args);
+})->setName('product');
 
 $app->redirect('/', '/products', 301);
