@@ -4,13 +4,13 @@
     {% block head %}
     <meta charset="utf-8"/>
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" >
+    <link href='//use.fontawesome.com/releases/v5.6.3/css/all.css' rel='stylesheet' integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
     <link href='/style.css' rel='stylesheet' type='text/css'>
     <title>{% block title %}{% endblock %} - Feed</title>
     {% endblock %}
 </head>
 <body>
-<div id="header"><a href="{{ path_for('cart') }}">Cart<i class="material-icons" title="go to cart">shopping_basket</i></a></div>
+<div id="header"><a href="{{ path_for('cart') }}"><i class="fas fa-shopping-cart" title="go to cart"></i>Cart</a></div>
 <div id="content">{% block content %}{% endblock %}</div>
 {% block script %}{% endblock %}
 </body>

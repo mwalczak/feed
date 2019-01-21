@@ -15,6 +15,10 @@ h1 {
     font-weight: 200;
 }
 
+a {
+    color: #aaa;
+}
+
 #content {
     clear: both;
     width: auto;
@@ -32,7 +36,7 @@ h1 {
     color: #719e40;
 }
 
-.product a {
+a {
     color: #aaa;
 }
 
@@ -53,6 +57,8 @@ h1 {
 
 i {
     cursor: pointer;
+    font-size: 24px;
+    margin: 0 10px;
 }
 
 #header {
