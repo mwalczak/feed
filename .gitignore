@@ -6,3 +6,4 @@
 !/cache/git.keep
 /src/settings.php
 /templates/include/product.twig
+/templates/include/products.twig
