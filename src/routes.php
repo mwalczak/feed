@@ -108,14 +108,15 @@ $app->get('/payment', function (Request $request, Response $response, array $arg
     $args['sessionId'] = $this->session::id();
 
     return $this->renderer->render($response, 'payment.twig', $args);
-})->setName('delivery');
+})->setName('payment');
 
 $app->get('/checkout', function (Request $request, Response $response, array $args) {
     $this->logger->info("Feed 'checkout' route");
-
-    $args['sessionId'] = $this->session::id();
-    unset($this->session->cart);
-    $this->session::destroy();
+    if(!empty($this->session->cart)){
+        $args['sessionId'] = $this->session::id();
+        unset($this->session->cart);
+        $this->session::destroy();
+    }
 
     return $this->renderer->render($response, 'checkout.twig', $args);
 })->setName('checkout');

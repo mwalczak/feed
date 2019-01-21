@@ -4,6 +4,11 @@
 {% block content %}
     <h1>Checkout page</h1>
     <p>This is the page where you see checkout confirmation</p>
+    {% if sessionId is empty %}
+        <p>No cart found, please annd products to cart and click purchase again</p>
+    {% else %}
+        <p>Cart id: {{ sessionId }} was cleaned after purchase confirmation</p>
+    {% endif %}
 {% endblock %}
 
 {% block script %}
