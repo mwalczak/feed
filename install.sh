@@ -1,4 +1,6 @@
+chmod 777 cache/ logs/
 cp src/settings.php.dist src/settings.php
+cp templates/script/layout.twig.dist templates/script/layout.twig
 cp templates/script/product.twig.dist templates/script/product.twig
 cp templates/script/products.twig.dist templates/script/products.twig
 cp templates/script/cart.twig.dist templates/script/cart.twig
