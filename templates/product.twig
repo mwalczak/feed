@@ -22,7 +22,10 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("Product {{ product.id }} added to cart")
+                        var ret = JSON.parse(this.responseText);
+                        console.log("Product {{ product.id }} added to cart, total products: "+ ret.productCount);
+                        document.getElementById("cart_icon").classList.add("shake");
+                        document.getElementById("cart_count").innerHTML = ret.productCount;
                     }
                 };
                 xhttp.open("GET", "{{ path_for('product-add', { 'id': product.id }) }}", true);

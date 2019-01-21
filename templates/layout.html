@@ -13,7 +13,9 @@
 <body>
 <div id="header">
     <a href="/"><i class="fas fa-home" title="go to start"></i>Start</a>
-    <a href="{{ path_for('cart') }}"><i class="fas fa-shopping-cart" title="go to cart"></i>Cart</a>
+    <a href="{{ path_for('cart') }}" style="text-decoration: none;"><i class="fas fa-shopping-cart" id="cart_icon"
+                                                                       title="go to cart"></i><span
+            id="cart_count">{{ cartCount }}</span><span style="text-decoration: underline;">Cart</span></a>
 </div>
 <div id="content" data-session-id="{{ sessionId }}">{% block content %}{% endblock %}</div>
 {% include 'script/layout.twig' %}

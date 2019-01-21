@@ -59,7 +59,7 @@ $app->get('/product/{id}/add', function (Request $request, Response $response, a
     $cart[$args['id']] = isset($cart[$args['id']]) ? $cart[$args['id']]+1 : 1;
     $this->session->cart = serialize($cart);
 
-    return $response->withStatus(200);
+    return $response->withJson(['productCount' => array_sum($cart)], 200);
 })->setName('product-add');
 
 $app->get('/cart', function (Request $request, Response $response, array $args) {
