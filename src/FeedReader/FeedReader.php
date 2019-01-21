@@ -13,14 +13,11 @@ class FeedReader
 
     private $url;
     private $cache;
-    private $productElement;
 
-
-    public function __construct($url, $cache = "", $productElement = "")
+    public function __construct($url, $cache = "")
     {
         $this->url = $url;
         $this->cache = $cache;
-        $this->productElement = $productElement;
 
         $this->xml = new \SimpleXMLElement($this->fetch());
     }
