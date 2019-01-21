@@ -11,7 +11,10 @@ $app->get('/products', function (Request $request, Response $response, array $ar
     $feedReader = $this->get('feedReader');
     $products = $feedReader->getProducts();
 
-    $args['products'] = $products;
+    $productsToShow = 100;
+
+    $args['products'] = array_slice($products,0,$productsToShow);
+    $args['productsShow'] = $productsToShow;
     $args['productsCount'] = count($products);
     $args['sessionId'] = $this->session::id();
 

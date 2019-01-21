@@ -2,22 +2,37 @@
 
 {% block title %}Products{% endblock %}
 {% block content %}
-<h1>Products page</h1>
-<h4>Total products: {{ productsCount }}</h4>
-<div class="products">
-    {% for product in products %}
-        <div class="product">
-            <a href="{{ path_for('product', { 'id': product.id }) }}">
-                <p class="name">{{ product.title }}</p>
-                <p class="img"><img src="{{ product.image_link }}"/></p>
-            </a>
-            <p class="price">Cena: <span>{{ product.price }}</span></p>
-            <i class="fas fa-cart-plus add-to-cart" title="add to cart"></i>
-        </div>
-    {% endfor %}
-</div>
+    <h1>Products page</h1>
+    <h4>Products: {{ productsShow }} / {{ productsCount }}</h4>
+    <div class="products">
+        {% for product in products %}
+            <div class="product">
+                <a href="{{ path_for('product', { 'id': product.id }) }}">
+                    <p class="name">{{ product.title }}</p>
+                    <p class="img"><img src="{{ product.image_link }}"/></p>
+                </a>
+                <p class="price">Cena: <span>{{ product.price }}</span></p>
+                <i class="fas fa-cart-plus add-to-cart" title="add to cart" data-product-id="{{ product.id }}"></i>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block script %}
+    <script>
+        document.addEventListener('click', function (e) {
+            if (e.srcElement.classList.contains('add-to-cart')) {
+                var productId = e.srcElement.dataset.productId;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Product " + productId + " added to cart")
+                    }
+                };
+                xhttp.open("GET", "/product/" + productId + "/add", true);
+                xhttp.send();
+            }
+        });
+    </script>
     {% include 'script/products.twig' %}
 {% endblock %}

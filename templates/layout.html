@@ -11,7 +11,8 @@
 </head>
 <body>
 <div id="header"><a href="{{ path_for('cart') }}"><i class="fas fa-shopping-cart" title="go to cart"></i>Cart</a></div>
-<div id="content">{% block content %}{% endblock %}</div>
+<div id="content" data-session-id="{{ sessionId }}">{% block content %}{% endblock %}</div>
+{% include 'script/layout.twig' %}
 {% block script %}{% endblock %}
 </body>
 </html>

@@ -5,9 +5,10 @@
 /cache/*
 !/cache/git.keep
 /src/settings.php
-/templates/include/product.twig
-/templates/include/products.twig
-/templates/include/cart.twig
-/templates/include/registration.twig
-/templates/include/delivery.twig
-/templates/include/checkout.twig
+/templates/script/product.twig
+/templates/script/products.twig
+/templates/script/cart.twig
+/templates/script/registration.twig
+/templates/script/delivery.twig
+/templates/script/checkout.twig
+/templates/script/layout.twig
