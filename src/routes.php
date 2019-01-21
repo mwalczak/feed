@@ -33,7 +33,6 @@ $app->get('/product/{id}', function (Request $request, Response $response, array
         return $response->withStatus(404);
     }
     $args['product'] = $product;
-
     $args['sessionId'] = $this->session::id();
 
     return $this->renderer->render($response, 'product.twig', $args);
@@ -82,6 +81,7 @@ $app->get('/cart', function (Request $request, Response $response, array $args) 
     }
 
     $args['total'] = $total;
+    $args['sessionId'] = $this->session::id();
 
     return $this->renderer->render($response, 'cart.twig', $args);
 })->setName('cart');
@@ -89,17 +89,33 @@ $app->get('/cart', function (Request $request, Response $response, array $args) 
 $app->get('/registration', function (Request $request, Response $response, array $args) {
     $this->logger->info("Feed 'registration' route");
 
+    $args['sessionId'] = $this->session::id();
+
     return $this->renderer->render($response, 'registration.twig', $args);
 })->setName('registration');
 
 $app->get('/delivery', function (Request $request, Response $response, array $args) {
     $this->logger->info("Feed 'delivery' route");
 
+    $args['sessionId'] = $this->session::id();
+
     return $this->renderer->render($response, 'delivery.twig', $args);
+})->setName('delivery');
+
+$app->get('/payment', function (Request $request, Response $response, array $args) {
+    $this->logger->info("Feed 'payment' route");
+
+    $args['sessionId'] = $this->session::id();
+
+    return $this->renderer->render($response, 'payment.twig', $args);
 })->setName('delivery');
 
 $app->get('/checkout', function (Request $request, Response $response, array $args) {
     $this->logger->info("Feed 'checkout' route");
+
+    $args['sessionId'] = $this->session::id();
+    unset($this->session->cart);
+    $this->session::destroy();
 
     return $this->renderer->render($response, 'checkout.twig', $args);
 })->setName('checkout');

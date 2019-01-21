@@ -11,4 +11,5 @@
 /templates/script/registration.twig
 /templates/script/delivery.twig
 /templates/script/checkout.twig
+/templates/script/payment.twig
 /templates/script/layout.twig

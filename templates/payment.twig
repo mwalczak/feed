@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Registration{% endblock %}
+{% block content %}
+    <h1>Payment page</h1>
+    <p>This is the page where you choose your payment options</p>
+
+    {% include 'include/cart_buttons.twig' %}
+{% endblock %}
+
+{% block script %}
+    {% include 'script/payment.twig' %}
+{% endblock %}
