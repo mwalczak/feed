@@ -10,11 +10,25 @@
         <p class="img"><img src="{{ product.image_link }}"/></p>
         <p class="price">Cena: <span>{{ product.price }}</span></p>
     </a>
-    <i class="material-icons add-to-basket">shopping_basket</i>
+    <i class="material-icons add-to-cart" title="add to cart">shopping_basket</i>
     <p class="description">{{ product.description }}</p>
 </div>
 {% endblock %}
 
 {% block script %}
-    {% include 'include/product.twig' %}
+    <script>
+        document.addEventListener('click', function(e){
+            if(e.srcElement.classList.contains('add-to-cart')){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Product {{ product.id }} added to cart")
+                    }
+                };
+                xhttp.open("GET", "{{ path_for('product-add', { 'id': product.id }) }}", true);
+                xhttp.send();
+            }
+        });
+    </script>
+    {% include 'script/product.twig' %}
 {% endblock %}

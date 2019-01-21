@@ -7,3 +7,7 @@
 /src/settings.php
 /templates/include/product.twig
 /templates/include/products.twig
+/templates/include/cart.twig
+/templates/include/registration.twig
+/templates/include/delivery.twig
+/templates/include/checkout.twig

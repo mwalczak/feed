@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}Cart{% endblock %}
+{% block content %}
+    <h1>Cart page</h1>
+    <h4>Total products: {{ cart|length }}</h4>
+    <table class="cart">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        {% for product in cart %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.total }}</td>
+            </tr>
+        {% endfor %}
+        <tfoot>
+        <tr>
+            <th>Total</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{ total }}</th>
+        </tr>
+        </tfoot>
+    </table>
+    <h4>Next steps</h4>
+    <div class="buttons">
+        <a href="{{ path_for('registration') }}">Registration<i class="material-icons" title="go to registration">shopping_basket</i></a>
+        <a href="{{ path_for('delivery') }}">Delivery<i class="material-icons" title="go to delivery">shopping_basket</i></a>
+        <a href="{{ path_for('checkout') }}">Checkout<i class="material-icons" title="go to checkout">shopping_basket</i></a>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    {% include 'script/checkout.twig' %}
+{% endblock %}

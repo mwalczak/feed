@@ -29,6 +29,11 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+// session middleware
+$container['session'] = function ($c) {
+    return new \SlimSession\Helper;
+};
+
 $container['feedReader'] = function ($c) {
     $settings = $c->get('settings')['feed'];
     $feedReader = new FeedReader($settings['url'], $settings['cache'], $settings['product_element']);

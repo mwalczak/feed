@@ -16,6 +16,7 @@ h1 {
 }
 
 #content {
+    clear: both;
     width: auto;
     text-align: center;
 }
@@ -48,4 +49,21 @@ h1 {
 
 .products .product img {
     max-width: 160px;
+}
+
+i {
+    cursor: pointer;
+}
+
+#header {
+    width: 200px;
+    float: right;
+}
+
+.cart {
+    margin: auto;
+}
+
+.cart td {
+    padding: 5px;
 }

@@ -10,6 +10,7 @@
     {% endblock %}
 </head>
 <body>
+<div id="header"><a href="{{ path_for('cart') }}">Cart<i class="material-icons" title="go to cart">shopping_basket</i></a></div>
 <div id="content">{% block content %}{% endblock %}</div>
 {% block script %}{% endblock %}
 </body>

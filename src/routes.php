@@ -6,23 +6,23 @@ use Slim\Http\Response;
 // Routes
 
 $app->get('/products', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/products' route");
+    $this->logger->info("Feed 'products' route");
 
     $feedReader = $this->get('feedReader');
     $products = $feedReader->getProducts();
 
     $args['products'] = $products;
     $args['productsCount'] = count($products);
+    $args['sessionId'] = $this->session::id();
 
     return $this->renderer->render($response, 'products.twig', $args);
 });
 
-
 $app->get('/product/{id}', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/product' route");
-
+    $this->logger->info("Feed 'product' route");
+    /**
+     * @var $feedReader \FeedReader\FeedReader
+     */
     $feedReader = $this->get('feedReader');
     $product = $feedReader->getProduct($args['id']);
 
@@ -31,7 +31,74 @@ $app->get('/product/{id}', function (Request $request, Response $response, array
     }
     $args['product'] = $product;
 
+    $args['sessionId'] = $this->session::id();
+
     return $this->renderer->render($response, 'product.twig', $args);
 })->setName('product');
+
+$app->get('/product/{id}/add', function (Request $request, Response $response, array $args) {
+    $this->logger->info("Feed 'product-add' route");
+
+    /**
+     * @var $feedReader \FeedReader\FeedReader
+     */
+    $feedReader = $this->get('feedReader');
+    $product = $feedReader->getProduct($args['id']);
+
+    if(empty($product)){
+        return $response->withStatus(404);
+    }
+
+    if(isset($this->session->cart)) {
+        $cart = unserialize($this->session->cart);
+    } else {
+        $cart = [];
+    }
+    $cart[$args['id']] = isset($cart[$args['id']]) ? $cart[$args['id']]+1 : 1;
+    $this->session->cart = serialize($cart);
+
+    return $response->withStatus(200);
+})->setName('product-add');
+
+$app->get('/cart', function (Request $request, Response $response, array $args) {
+    $this->logger->info("Feed 'cart' route");
+    $total = 0;
+    if(isset($this->session->cart)){
+        /**
+         * @var $feedReader \FeedReader\FeedReader
+         */
+        $feedReader = $this->get('feedReader');
+        $cart = unserialize($this->session->cart);
+        foreach($cart as $id=>$quantity){
+            $product = $feedReader->getProduct($id);
+            $total += $productTotal = $quantity*$product['price'];
+            $args['cart'][] = array_merge(['id'=>$id, 'quantity'=>$quantity, 'total'=>$productTotal], $product);
+        }
+    } else {
+        $args['cart'] = [];
+    }
+
+    $args['total'] = $total;
+
+    return $this->renderer->render($response, 'cart.twig', $args);
+})->setName('cart');
+
+$app->get('/registration', function (Request $request, Response $response, array $args) {
+    $this->logger->info("Feed 'registration' route");
+
+    return $this->renderer->render($response, 'registration.twig', $args);
+})->setName('registration');
+
+$app->get('/delivery', function (Request $request, Response $response, array $args) {
+    $this->logger->info("Feed 'delivery' route");
+
+    return $this->renderer->render($response, 'delivery.twig', $args);
+})->setName('delivery');
+
+$app->get('/checkout', function (Request $request, Response $response, array $args) {
+    $this->logger->info("Feed 'checkout' route");
+
+    return $this->renderer->render($response, 'checkout.twig', $args);
+})->setName('checkout');
 
 $app->redirect('/', '/products', 301);

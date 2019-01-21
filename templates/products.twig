@@ -12,12 +12,12 @@
                 <p class="img"><img src="{{ product.image_link }}"/></p>
             </a>
             <p class="price">Cena: <span>{{ product.price }}</span></p>
-            <i class="material-icons add-to-basket">shopping_basket</i>
+            <i class="material-icons add-to-basket" title="add to basket">shopping_basket</i>
         </div>
     {% endfor %}
 </div>
 {% endblock %}
 
 {% block script %}
-    {% include 'include/products.twig' %}
+    {% include 'script/products.twig' %}
 {% endblock %}
