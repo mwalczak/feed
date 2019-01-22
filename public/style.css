@@ -105,3 +105,7 @@ i.shake {
     text-decoration: none;
     margin-right: 10px;
 }
+
+.product_quantity {
+    width: 50px;
+}

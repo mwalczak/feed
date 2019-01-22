@@ -86,6 +86,28 @@ class AppController
         return $response->withJson(['productCount' => array_sum($cart)], 200);
     }
 
+    public function productQuantityAction(Request $request, Response $response, array $args) {
+        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
+        $product = $feedReader->getProduct($args['id']);
+
+        if(empty($product)){
+            return $response->withStatus(404);
+        }
+
+        if(isset($this->session->cart)) {
+            $cart = unserialize($this->session->cart);
+        } else {
+            $cart = [];
+        }
+        $quantity = intval($request->getBody()->getContents());
+        $this->logger->info("Feed 'product-quantity' route - set product:".$args['id']." - quantity: ".$quantity);
+
+        $cart[$args['id']] = $quantity;
+        $this->session->cart = serialize($cart);
+
+        return $response->withStatus(200);
+    }
+
     public function cartAction(Request $request, Response $response, array $args) {
         $this->logger->info("Feed 'cart' route");
         $total = 0;

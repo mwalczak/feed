@@ -10,6 +10,8 @@ $app->get('/product/{id}', AppController::class . ':productAction')->setName('pr
 
 $app->get('/product/{id}/add', AppController::class . ':productAddAction')->setName('product-add');
 
+$app->post('/product/{id}/quantity', AppController::class . ':productQuantityAction')->setName('product-quantity');
+
 $app->get('/cart', AppController::class . ':cartAction')->setName('cart');
 
 $app->get('/registration', AppController::class . ':registrationAction')->setName('registration');
