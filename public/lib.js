@@ -21,4 +21,5 @@ function calc_cart() {
     }
     document.getElementById("cart_total").innerHTML = cart_total;
     document.getElementById("cart_count").innerHTML = cart_count;
+    document.getElementById("product_count").innerHTML = rows.length
 }

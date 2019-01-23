@@ -1,3 +1,17 @@
 <script type="text/javascript">
     console.log("Insert your custom cart page javasript here");
+    {#
+    //SAREhub Integration
+    sareX_params.tag = {"_userId":null,"_email":null,'_cartsummary' : {'cart_id' : '{{ sessionId }}'}};
+    console.log(sareX_params.tag);
+
+    document.addEventListener('click', function(e){
+        if(e.srcElement.classList.contains('product_remove')){
+            var productId = e.srcElement.dataset.productId.toString();
+            var execute_params = {'_userId': '', '_email' : '', '_cartdel' : {'country' : 'PL', 'language': 'pl', 'cart_id' : '{{ sessionId }}', 'product_id' : productId}};
+            console.log(execute_params);
+            sareX_core.execute(10, execute_params);
+        }
+    });
+    #}
 </script>

@@ -3,7 +3,7 @@
 {% block title %}Cart{% endblock %}
 {% block content %}
     <h1>Cart page</h1>
-    <h4>Total products: {{ cart|length }}</h4>
+    <h4>Total products: <span id="product_count">{{ cart|length }}</span></h4>
     <table class="cart" id="cart">
         <thead>
         <tr>
@@ -12,6 +12,7 @@
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
+            <th></th>
         </tr>
         </thead>
         {% for product in cart %}
@@ -22,6 +23,7 @@
                 <td><input class="product_quantity" type="text" value="{{ product.quantity }}" maxlength="3"
                            data-product-id="{{ product.id }}"/></td>
                 <td class="product_total">{{ product.total }}</td>
+                <td><i class="fas fa-trash product_remove" title="remove from cart" data-product-id="{{ product.id }}"></i></td>
             </tr>
         {% endfor %}
         <tfoot>
@@ -31,6 +33,7 @@
             <th></th>
             <th></th>
             <th id="cart_total">{{ total }}</th>
+            <th></th>
         </tr>
         </tfoot>
     </table>
@@ -39,12 +42,12 @@
 
 {% block script %}
     <script type="text/javascript">
-        var inputs = document.getElementsByClassName("product_quantity");
-        for (var i = 0; i < inputs.length; i++) {
+        const inputs = document.getElementsByClassName("product_quantity");
+        for (let i = 0; i < inputs.length; i++) {
             inputs[i].addEventListener('change', function (e) {
-                var quantity = e.srcElement.value;
-                var productId = e.srcElement.dataset.productId;
-                var xhttp = new XMLHttpRequest();
+                let quantity = e.srcElement.value;
+                let productId = e.srcElement.dataset.productId;
+                let xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         console.log("Product " + productId + " quantity changed: " + quantity);
@@ -53,6 +56,24 @@
                 };
                 xhttp.open("POST", "/product/" + productId + "/quantity", true);
                 xhttp.send(quantity);
+            });
+        }
+
+        const removes = document.getElementsByClassName("product_remove");
+        for (let i = 0; i < removes.length; i++) {
+            removes[i].addEventListener('click', function (e) {
+                let productId = e.srcElement.dataset.productId;
+                let xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Product " + productId + " removed");
+                        let row = e.srcElement.parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                        calc_cart();
+                    }
+                };
+                xhttp.open("DELETE", "/product/" + productId, true);
+                xhttp.send();
             });
         }
     </script>

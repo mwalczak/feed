@@ -108,6 +108,27 @@ class AppController
         return $response->withStatus(200);
     }
 
+    public function productRemoveAction(Request $request, Response $response, array $args) {
+        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
+        $product = $feedReader->getProduct($args['id']);
+
+        if(empty($product)){
+            return $response->withStatus(404);
+        }
+
+        if(isset($this->session->cart)) {
+            $cart = unserialize($this->session->cart);
+        } else {
+            $cart = [];
+        }
+        $this->logger->info("Feed 'product-remove' route - product:".$args['id']);
+
+        unset($cart[$args['id']]);
+        $this->session->cart = serialize($cart);
+
+        return $response->withStatus(200);
+    }
+
     public function cartAction(Request $request, Response $response, array $args) {
         $this->logger->info("Feed 'cart' route");
         $total = 0;

@@ -109,3 +109,7 @@ i.shake {
 .product_quantity {
     width: 50px;
 }
+
+.product_remove {
+    font-size: 15px;
+}

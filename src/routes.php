@@ -12,6 +12,8 @@ $app->get('/product/{id}/add', AppController::class . ':productAddAction')->setN
 
 $app->post('/product/{id}/quantity', AppController::class . ':productQuantityAction')->setName('product-quantity');
 
+$app->delete('/product/{id}', AppController::class . ':productRemoveAction')->setName('product-remove');
+
 $app->get('/cart', AppController::class . ':cartAction')->setName('cart');
 
 $app->get('/registration', AppController::class . ':registrationAction')->setName('registration');

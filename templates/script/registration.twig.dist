@@ -1,3 +1,8 @@
 <script type="text/javascript">
     console.log("Insert your custom registration page javasript here");
+    {#
+    //SAREhub Integration
+    sareX_params.tag = {"_userId":null,"_email":null,'_cartregistration' : {'cart_id' : '{{ sessionId }}'}};
+    console.log(sareX_params.tag);
+    #}
 </script>
