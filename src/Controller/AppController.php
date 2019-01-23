@@ -41,12 +41,9 @@ class AppController
 
         $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
         $products = $feedReader->getProducts();
-
-        $productsToShow = 100;
-
-        $args['products'] = array_slice($products,0,$productsToShow);
-        $args['productsShow'] = $productsToShow;
         $args['productsCount'] = count($products);
+        $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products,0,$this->settings['feed']['max_products_on_page']) : $products;
+        $args['productsShow'] = count($args['products']);
 
         return $this->render($response, 'products.twig', $args);
     }

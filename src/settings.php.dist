@@ -19,8 +19,9 @@ return [
 
         // Feed settings
         'feed' => [
-            'url' => 'http://feed.inistrack.net/api/v1/feeds/feed/756e1cb2e6ca818f0335f6a48837fd2ae7aaac6ca2fd926f5a8197517f55dd5e/file/rss2/display',
+            'url' => 'http://feed.url',
             'cache' => __DIR__ . '/../cache/feed.xml',
+            'max_products_on_page' => 0
         ],
     ],
 ];

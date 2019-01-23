@@ -9,7 +9,7 @@
             <div class="product">
                 <a href="{{ path_for('product', { 'id': product.id }) }}">
                     <p class="name">{{ product.title }}</p>
-                    <p class="img"><img src="{{ product.image_link }}"/></p>
+                    <p class="img"><img class="lazy" data-src="{{ product.image_link }}"/></p>
                 </a>
                 <p class="price">Cena: <span>{{ product.price }}</span></p>
                 <i class="fas fa-cart-plus add-to-cart" title="add to cart" data-product-id="{{ product.id }}"></i>
@@ -19,7 +19,11 @@
 {% endblock %}
 
 {% block script %}
+    <script src="//cdn.jsdelivr.net/npm/vanilla-lazyload@10.19.0/dist/lazyload.min.js"></script>
     <script>
+        var myLazyLoad = new LazyLoad({
+            elements_selector: ".lazy"
+        });
         document.addEventListener('click', function (e) {
             if (e.srcElement.classList.contains('add-to-cart')) {
                 const productId = e.srcElement.dataset.productId;
