@@ -22,11 +22,11 @@
     <script>
         document.addEventListener('click', function (e) {
             if (e.srcElement.classList.contains('add-to-cart')) {
-                var productId = e.srcElement.dataset.productId;
-                var xhttp = new XMLHttpRequest();
+                const productId = e.srcElement.dataset.productId;
+                const xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        var ret = JSON.parse(this.responseText);
+                        const ret = JSON.parse(this.responseText);
                         console.log("Product {{ product.id }} added to cart, total products: "+ ret.productCount);
                         shake_cart();
                         document.getElementById("cart_count").innerHTML = ret.productCount;

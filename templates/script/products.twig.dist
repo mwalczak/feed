@@ -4,8 +4,8 @@
     //SAREhub Integration
     document.addEventListener('click', function(e){
         if(e.srcElement.classList.contains('add-to-cart')){
-            var productId = e.srcElement.dataset.productId.toString();
-            var execute_params = {'_userId': '', '_email' : '', '_cartadd' : {'country' : 'PL', 'language': 'pl', 'cart_id' : '{{ sessionId }}', 'product_id' : productId, 'quantity' : 1}};
+            const productId = e.srcElement.dataset.productId.toString();
+            const execute_params = {'_userId': '', '_email' : '', '_cartadd' : {'country' : 'PL', 'language': 'pl', 'cart_id' : '{{ sessionId }}', 'product_id' : productId, 'quantity' : 1}};
             console.log(execute_params);
             sareX_core.execute(10, execute_params);
         }
