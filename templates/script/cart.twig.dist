@@ -13,5 +13,15 @@
             sareX_core.execute(10, execute_params);
         }
     });
+
+    document.addEventListener('change', function(e){
+        if(e.srcElement.classList.contains('product_quantity')){
+            var quantity = e.srcElement.value;
+            var productId = e.srcElement.dataset.productId.toString();
+            var execute_params = {'_userId': '', '_email' : '', '_cartquantity' : {'country' : 'PL', 'language': 'pl', 'cart_id' : '{{ sessionId }}', 'product_id' : productId, 'quantity' : quantity}};
+            console.log(execute_params);
+            sareX_core.execute(10, execute_params);
+        }
+    });
     #}
 </script>
