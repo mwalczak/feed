@@ -14,7 +14,7 @@ class FeedReader
     private $url;
     private $cache;
 
-    public function __construct($url, $cache = "")
+    public function __construct($url, $cache = false)
     {
         $this->url = $url;
         $this->cache = $cache;
