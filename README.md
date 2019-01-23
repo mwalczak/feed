@@ -22,3 +22,8 @@ Configure your product feed url in settings.php
 Run php server or setup your vhost configuration to /public
     
     php -S localhost:8080 -t public
+    
+Paste your optional javascript in:
+
+    templates/script
+   
