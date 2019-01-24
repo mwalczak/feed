@@ -11,6 +11,9 @@
     </a>
     <i class="fas fa-cart-plus add-to-cart" title="add to cart"></i>
     <p class="description">{{ product.description }}</p>
+    {% for field in extraFields %}
+        <p class="description" data-field="{{field.name}}"><span>{{field.name}}</span>: {{ field.value }}</p>
+    {% endfor %}
 </div>
 {% endblock %}
 

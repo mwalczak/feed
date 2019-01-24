@@ -21,7 +21,10 @@ return [
         'feed' => [
             'url' => 'http://feed.url',
             'cache' => __DIR__ . '/../cache/feed.xml',
-            'max_products_on_page' => 0
+            'max_products_on_page' => 0,
+            'extra_fields' => [ //namespace => [field1, field2...]
+                //'ns2' => ['Country', 'Duration', 'City', 'RoomDescription']
+            ]
         ],
     ],
 ];

@@ -58,7 +58,7 @@ class AppController
     public function productsAction(Request $request, Response $response, array $args) {
         $this->logger->info("Feed 'products' route");
 
-        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
+        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache'], $this->settings['feed']['extra_fields']);
         $products = $feedReader->getProducts();
         $args['productsCount'] = count($products);
         $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products,0,$this->settings['feed']['max_products_on_page']) : $products;
@@ -70,14 +70,16 @@ class AppController
     public function productAction(Request $request, Response $response, array $args) {
         $this->logger->info("Feed 'product' route");
 
-        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
+        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache'], $this->settings['feed']['extra_fields']);
         $product = $feedReader->getProduct($args['id']);
 
         if(empty($product)){
             return $response->withStatus(404);
         }
         $args['product'] = $product;
-
+        foreach ($feedReader->getExtraFields() as $field){
+            $args['extraFields'][] = ['name' => $field, 'value' => strip_tags($product[$field])];
+        }
         return $this->render($response, 'product.twig', $args);
     }
 

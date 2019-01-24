@@ -125,3 +125,7 @@ label {
 input[type='submit']{
     float: right;
 }
+
+.description span {
+    font-weight: bold;
+}

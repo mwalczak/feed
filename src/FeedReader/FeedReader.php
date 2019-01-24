@@ -13,11 +13,13 @@ class FeedReader
 
     private $url;
     private $cache;
+    private $extraFields;
 
-    public function __construct($url, $cache = false)
+    public function __construct($url, $cache = false, $extraFields = [])
     {
         $this->url = $url;
         $this->cache = $cache;
+        $this->extraFields = $extraFields;
 
         $this->xml = new \SimpleXMLElement($this->fetch());
     }
@@ -31,6 +33,11 @@ class FeedReader
             $product = [];
             foreach($item->children("g", true) as $attribute=>$value){
                 $product[$attribute] = (string) $value;
+            }
+            foreach($this->extraFields as $namespace=>$fields){
+                foreach($item->children($namespace, true) as $attribute=>$value){
+                    $product[$attribute] = (string) $value;
+                }
             }
             foreach($item->children() as $attribute=>$value){
                 $product[$attribute] = (string) $value;
@@ -56,6 +63,14 @@ class FeedReader
             }
             return $contents;
         }
+    }
+
+    public function getExtraFields(){
+        $extraFields = [];
+        foreach($this->extraFields as $namespace=>$fields){
+            $extraFields = array_merge($extraFields, $fields);
+        }
+        return $extraFields;
     }
 
 }
