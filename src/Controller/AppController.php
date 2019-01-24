@@ -186,7 +186,7 @@ class AppController
     }
 
     public function checkoutAction(Request $request, Response $response, array $args) {
-        $this->logger->info("Feed 'checkout' route");
+        $this->logger->info("Feed 'checkout' route - session:".$this->session::id().", email:".$this->session->email);
 
         if(!empty($this->session->cart)){
             $args['sessionId'] = $this->session::id();
