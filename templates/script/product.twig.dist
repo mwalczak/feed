@@ -2,7 +2,7 @@
     console.log("Insert your custom product page javasript here");
     {#
     //SAREhub Integration
-    sareX_params.tag = {"_userId":null,"_email":null,"_product":{"id":"{{ product.id }}",
+    sareX_params.tag = {"_userId":null,"_email":'{{ email }}',"_product":{"id":"{{ product.id }}",
         "url":"{{ base_url() }}{{ path_for('product', { 'id': product.id }) }}","country":"PL","language":"pl"}};
 
     document.addEventListener('click', function(e){
