@@ -9,18 +9,34 @@
 namespace Controller;
 
 use FeedReader\FeedReader;
+use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Views\Twig;
 
 class AppController
 {
+    /**
+     * @var Container $container
+     */
+    private $container;
+    /**
+     * @var Twig $renderer
+     */
     private $renderer;
+    /**
+     * @var Logger $logger
+     */
     private $logger;
+    /**
+     * @var \SlimSession\Helper $session
+     */
     private $session;
     private $settings;
 
     public function __construct(Container $container) {
+        $this->container = $container;
         $this->renderer = $container->get("renderer");
         $this->logger = $container->get("logger");
         $this->session = $container->get("session");
@@ -29,6 +45,7 @@ class AppController
 
     private function render(Response $response, string $template, array $args){
         $args['sessionId'] = $this->session::id();
+        $args['email'] = $this->session->email;
         if(!empty($this->session->cart)){
             $cart = unserialize($this->session->cart);
             $args['cartCount'] = array_sum($cart);
@@ -174,6 +191,18 @@ class AppController
         }
 
         return $this->renderer->render($response, 'checkout.twig', $args);
+    }
+
+    public function sessionAction(Request $request, Response $response, array $args) {
+        $fields = $request->getParsedBody();
+
+        $this->logger->info("Feed 'session' route: ".json_encode($fields));
+
+        foreach($fields as $key=>$value){
+            $this->session->set($key, $value);
+        }
+
+        return $response->withRedirect($this->container->get('router')->pathFor('registration'), 302);
     }
 
 }

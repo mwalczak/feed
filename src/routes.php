@@ -24,4 +24,6 @@ $app->get('/payment', AppController::class . ':paymentAction')->setName('payment
 
 $app->get('/checkout', AppController::class . ':checkoutAction')->setName('checkout');
 
+$app->post('/session', AppController::class . ':sessionAction')->setName('session');
+
 $app->redirect('/', '/products', 301);

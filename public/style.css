@@ -113,3 +113,15 @@ i.shake {
 .product_remove {
     font-size: 15px;
 }
+
+form {
+    display: inline-block;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type='submit']{
+    float: right;
+}
