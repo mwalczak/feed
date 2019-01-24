@@ -49,6 +49,8 @@ class AppController
         if(!empty($this->session->cart)){
             $cart = unserialize($this->session->cart);
             $args['cartCount'] = array_sum($cart);
+            $args['cartProducts'] = implode(",",array_keys($cart));
+            $args['cartQuantities'] = implode(",",array_values($cart));
         }
         return $this->renderer->render($response, $template, $args);
     }
