@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    {% block head %}
     <meta charset="utf-8"/>
     <title>{% block title %}{% endblock %} - Feed</title>
-    {% endblock %}
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -14,10 +12,14 @@
     <meta name="application-name" content="{{ appName }}">
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="{{ appName }} product feed showroom">
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
 <div id="header">
-    <a href="/"><i class="fas fa-home" title="go to start"></i>Start</a>
+    <a href="/"><i class="fas fa-home" title="go to homepage"></i>Home</a>
     <a href="{{ path_for('cart') }}" style="text-decoration: none;"><i class="fas fa-shopping-cart" id="cart_icon"
                                                                        title="go to cart"></i><span
             id="cart_count">{{ cartCount }}</span><span style="text-decoration: underline;">Cart</span></a>
