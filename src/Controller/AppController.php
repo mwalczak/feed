@@ -44,6 +44,8 @@ class AppController
     }
 
     private function render(Response $response, string $template, array $args){
+        $args['appName'] = $this->settings['appName'];
+
         $args['sessionId'] = $this->session::id();
         $args['email'] = $this->session->email;
         if(!empty($this->session->cart)){
@@ -52,6 +54,7 @@ class AppController
             $args['cartProducts'] = implode(",",array_keys($cart));
             $args['cartQuantities'] = implode(",",array_values($cart));
         }
+
         return $this->renderer->render($response, $template, $args);
     }
 
