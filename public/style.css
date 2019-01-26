@@ -112,3 +112,19 @@ i.shake {
 .product_remove {
     font-size: 0.9em;
 }
+
+form {
+    display: inline-block;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type='submit']{
+    float: right;
+}
+
+.description span {
+    font-weight: bold;
+}

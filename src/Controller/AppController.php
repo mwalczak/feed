@@ -9,18 +9,34 @@
 namespace Controller;
 
 use FeedReader\FeedReader;
+use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Views\Twig;
 
 class AppController
 {
+    /**
+     * @var Container $container
+     */
+    private $container;
+    /**
+     * @var Twig $renderer
+     */
     private $renderer;
+    /**
+     * @var Logger $logger
+     */
     private $logger;
+    /**
+     * @var \SlimSession\Helper $session
+     */
     private $session;
     private $settings;
 
     public function __construct(Container $container) {
+        $this->container = $container;
         $this->renderer = $container->get("renderer");
         $this->logger = $container->get("logger");
         $this->session = $container->get("session");
@@ -29,9 +45,12 @@ class AppController
 
     private function render(Response $response, string $template, array $args){
         $args['sessionId'] = $this->session::id();
+        $args['email'] = $this->session->email;
         if(!empty($this->session->cart)){
             $cart = unserialize($this->session->cart);
             $args['cartCount'] = array_sum($cart);
+            $args['cartProducts'] = implode(",",array_keys($cart));
+            $args['cartQuantities'] = implode(",",array_values($cart));
         }
         return $this->renderer->render($response, $template, $args);
     }
@@ -39,7 +58,7 @@ class AppController
     public function productsAction(Request $request, Response $response, array $args) {
         $this->logger->info("Feed 'products' route");
 
-        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
+        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache'], $this->settings['feed']['extra_fields']);
         $products = $feedReader->getProducts();
         $args['productsCount'] = count($products);
         $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products,0,$this->settings['feed']['max_products_on_page']) : $products;
@@ -51,14 +70,16 @@ class AppController
     public function productAction(Request $request, Response $response, array $args) {
         $this->logger->info("Feed 'product' route");
 
-        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
+        $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache'], $this->settings['feed']['extra_fields']);
         $product = $feedReader->getProduct($args['id']);
 
         if(empty($product)){
             return $response->withStatus(404);
         }
         $args['product'] = $product;
-
+        foreach ($feedReader->getExtraFields() as $field){
+            $args['extraFields'][] = ['name' => $field, 'value' => strip_tags($product[$field])];
+        }
         return $this->render($response, 'product.twig', $args);
     }
 
@@ -165,7 +186,7 @@ class AppController
     }
 
     public function checkoutAction(Request $request, Response $response, array $args) {
-        $this->logger->info("Feed 'checkout' route");
+        $this->logger->info("Feed 'checkout' route - session:".$this->session::id().", email:".$this->session->email);
 
         if(!empty($this->session->cart)){
             $args['sessionId'] = $this->session::id();
@@ -174,6 +195,18 @@ class AppController
         }
 
         return $this->renderer->render($response, 'checkout.twig', $args);
+    }
+
+    public function sessionAction(Request $request, Response $response, array $args) {
+        $fields = $request->getParsedBody();
+
+        $this->logger->info("Feed 'session' route: ".json_encode($fields));
+
+        foreach($fields as $key=>$value){
+            $this->session->set($key, $value);
+        }
+
+        return $response->withRedirect($this->container->get('router')->pathFor('registration'), 302);
     }
 
 }

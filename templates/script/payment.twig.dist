@@ -2,7 +2,7 @@
     console.log("Insert your custom delivery page javasript here");
     {#
     //SAREhub Integration
-    sareX_params.tag = {"_userId":null,"_email":null,'_cartpayment' : {'cart_id' : '{{ sessionId }}'}};
+    sareX_params.tag = {"_userId":null,"_email":'{{ email }}','_cartpayment' : {'cart_id' : '{{ sessionId }}'}};
     console.log(sareX_params.tag);
     #}
 </script>
