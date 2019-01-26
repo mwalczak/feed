@@ -5,7 +5,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: #aaa;
-    font-size: 18px;
+    font-size: 1em;
 }
 
 h1 {
@@ -71,7 +71,7 @@ a {
 
 i {
     cursor: pointer;
-    font-size: 24px;
+    font-size: 1.5em;
     margin: 0 10px;
 }
 
@@ -100,8 +100,7 @@ i.shake {
 
 #cart_count {
     color: #ac2925;
-    font-size: 12px;
-    line-height: 24px;
+    font-size: 0.7em;
     text-decoration: none;
     margin-right: 10px;
 }
@@ -111,5 +110,5 @@ i.shake {
 }
 
 .product_remove {
-    font-size: 15px;
+    font-size: 0.9em;
 }
