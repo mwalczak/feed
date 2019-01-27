@@ -25,6 +25,20 @@ module.exports = {
             },
         },
         {
+            urlPattern: /.+\.(?:png|gif|jpg|jpeg|svg).*$/,
+            handler: 'cacheFirst',
+            options: {
+                cacheName: 'remote-images',
+                cacheableResponse: {
+                    statuses: [0, 200]
+                },
+                expiration: {
+                    maxEntries: 100,
+                    maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+                },
+            },
+        },
+        {
             urlPattern: /\.(?:js|css|woff2|webmanifest)$/,
             handler: 'staleWhileRevalidate',
             options: {
