@@ -7,14 +7,14 @@ module.exports = {
 
     runtimeCaching: [
         {
-            urlPattern: /(\/|\/products|\/product\/\\d+)/,
+            urlPattern: /(\/|\/products|\/product\/.+)$/,
             handler: 'staleWhileRevalidate',
             options: {
                 cacheName: 'pages'
             },
         },
         {
-            urlPattern: /\.(?:png|gif|jpg|jpeg|svg)/,
+            urlPattern: /\.(?:png|gif|jpg|jpeg|svg).*$/,
             handler: 'cacheFirst',
             options: {
                 cacheName: 'images',
