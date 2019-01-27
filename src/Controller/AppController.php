@@ -45,6 +45,7 @@ class AppController
 
     private function render(Response $response, string $template, array $args){
         $args['appName'] = $this->settings['appName'];
+        $args['cacheTime'] = ($this->settings['feed']['cache'] && is_file($this->settings['feed']['cache'])) ? filemtime($this->settings['feed']['cache']) : time();
 
         $args['sessionId'] = $this->session::id();
         $args['email'] = $this->session->email;

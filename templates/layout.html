@@ -28,11 +28,12 @@
 {% include 'script/layout.twig' %}
 <link href='/fontawesome-free-5.6.3-web/css/all.css' rel='stylesheet' type="text/css"/>
 <link href='/style.css' rel='stylesheet' type='text/css'/>
-<script src="/upup.min.js"></script>
 <script src='/lib.js'></script>
+<script src="/upup.min.js"></script>
 <script>
     UpUp.start({
-        'content-url': '/products',
+        'service-worker-url': '/upup.sw.min.js',
+        'content-url': '/products?v={{cacheTime}}',
         'assets': [
             'style.css',
             'lib.js',
