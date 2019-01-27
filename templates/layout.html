@@ -26,10 +26,21 @@
 </div>
 <div id="content" data-session-id="{{ sessionId }}">{% block content %}{% endblock %}</div>
 {% include 'script/layout.twig' %}
-<link href='//use.fontawesome.com/releases/v5.6.3/css/all.css' rel='stylesheet'
-      integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
-<link href='/style.css' rel='stylesheet' type='text/css'>
+<link href='/fontawesome-free-5.6.3-web/css/all.css' rel='stylesheet' type="text/css"/>
+<link href='/style.css' rel='stylesheet' type='text/css'/>
+<script src="/upup.min.js"></script>
 <script src='/lib.js'></script>
+<script>
+    UpUp.start({
+        'content-url': '/products',
+        'assets': [
+            'style.css',
+            'lib.js',
+            'fontawesome-free-5.6.3-web/css/all.css',
+            'fontawesome-free-5.6.3-web/webfonts/fa-solid-900.woff2'
+        ]
+    });
+</script>
 {% block script %}{% endblock %}
 </body>
 </html>
