@@ -30,18 +30,6 @@
 <link href='/style.css' rel='stylesheet' type='text/css'/>
 <script src='/lib.js'></script>
 <script src="/upup.min.js"></script>
-<script>
-    UpUp.start({
-        'service-worker-url': '/upup.sw.min.js',
-        'content-url': '/products?v={{cacheTime}}',
-        'assets': [
-            'style.css',
-            'lib.js',
-            'fontawesome-free-5.6.3-web/css/all.css',
-            'fontawesome-free-5.6.3-web/webfonts/fa-solid-900.woff2'
-        ]
-    });
-</script>
 {% block script %}{% endblock %}
 </body>
 </html>
