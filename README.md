@@ -27,3 +27,15 @@ Paste your optional javascript in:
 
     templates/script
    
+## What's new
+2019-01-27
+
+Pagination, frontend performance, first PWA
+
+2019-01-24
+
+More events (quantity, remove), session handling
+
+2019-01-20
+
+Project start, first working version
