@@ -43,8 +43,7 @@ a {
 .products .product {
     width: 200px;
     height: 400px;
-    float: left;
-    margin: 10px;
+    margin-bottom: 20px;
 }
 
 .products .product .name {
