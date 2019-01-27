@@ -66,7 +66,7 @@ class AppController
         $this->logger->info("Feed 'products' route");
 
         $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache'], $this->settings['feed']['extra_fields']);
-        $products = array_slice($feedReader->getProducts(),0,35);
+        $products = $feedReader->getProducts();
         $args['productsCount'] = count($products);
         $queryParams = $request->getQueryParams();
         $offset = 0;
