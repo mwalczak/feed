@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-    color: #719e40;
+    color: #067e25;
     letter-spacing: -3px;
     font-family: 'Lato', sans-serif;
     font-weight: 200;
@@ -27,13 +27,13 @@ a {
 
 .product {
     display: inline-block;
-    border: 1px solid #719e40;
+    border: 1px solid #067e25;
     padding: 20px;
     margin: auto;
 }
 
 .price span {
-    color: #719e40;
+    color: #067e25;
 }
 
 a {
