@@ -7,7 +7,7 @@ module.exports = {
 
     runtimeCaching: [
         {
-            urlPattern: /(\/|\/products|\/product\/.+)$/,
+            urlPattern: /(\/.*|\/products.*|\/product\/.+)$/,
             handler: 'staleWhileRevalidate',
             options: {
                 cacheName: 'pages'

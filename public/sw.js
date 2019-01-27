@@ -139,7 +139,7 @@ self.__precacheManifest = [
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/(\/|\/products|\/product\/.+)$/, workbox.strategies.staleWhileRevalidate({ "cacheName":"pages", plugins: [] }), 'GET');
+workbox.routing.registerRoute(/(\/.*|\/products.*|\/product\/.+)$/, workbox.strategies.staleWhileRevalidate({ "cacheName":"pages", plugins: [] }), 'GET');
 workbox.routing.registerRoute(/\.(?:png|gif|jpg|jpeg|svg).*$/, workbox.strategies.cacheFirst({ "cacheName":"images", plugins: [new workbox.expiration.Plugin({"maxEntries":100,"maxAgeSeconds":2592000,"purgeOnQuotaError":false})] }), 'GET');
 workbox.routing.registerRoute(/.+\.(?:png|gif|jpg|jpeg|svg).*$/, workbox.strategies.cacheFirst({ "cacheName":"remote-images", plugins: [new workbox.cacheableResponse.Plugin({"statuses":[0,200]}), new workbox.expiration.Plugin({"maxEntries":100,"maxAgeSeconds":2592000,"purgeOnQuotaError":false})] }), 'GET');
 workbox.routing.registerRoute(/\.(?:js|css|woff2|webmanifest)$/, workbox.strategies.staleWhileRevalidate({ "cacheName":"static-resources", plugins: [] }), 'GET');
