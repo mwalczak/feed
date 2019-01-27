@@ -4,6 +4,8 @@ use Controller\AppController;
 
 // Routes
 
+$app->get('/', AppController::class . ':productsAction');
+
 $app->get('/products', AppController::class . ':productsAction');
 
 $app->get('/product/{id}', AppController::class . ':productAction')->setName('product');
@@ -26,4 +28,3 @@ $app->get('/checkout', AppController::class . ':checkoutAction')->setName('check
 
 $app->post('/session', AppController::class . ':sessionAction')->setName('session');
 
-$app->redirect('/', '/products', 301);
