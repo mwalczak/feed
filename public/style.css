@@ -25,7 +25,7 @@ a {
     text-align: center;
 }
 
-.product {
+#content .product {
     display: inline-block;
     border: 1px solid #719e40;
     padding: 20px;
@@ -52,6 +52,10 @@ a {
 
 .products .product img {
     max-width: 160px;
+}
+
+.product img {
+    max-width: 280px;
 }
 
 #header {
