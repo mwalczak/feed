@@ -25,7 +25,7 @@ a {
     text-align: center;
 }
 
-#content .product {
+.product {
     display: inline-block;
     border: 1px solid #719e40;
     padding: 20px;
