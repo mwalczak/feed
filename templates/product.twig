@@ -30,8 +30,8 @@
                         document.getElementById("cart_count").innerHTML = ret.productCount;
                     }
                 };
-                xhttp.open("GET", "{{ path_for('product-add', { 'id': product.id }) }}", true);
-                xhttp.send();
+                xhttp.open("POST", "{{ path_for('product-add', { 'id': product.id }) }}", true);
+                xhttp.send("1");
             }
         });
     </script>

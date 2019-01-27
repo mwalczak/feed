@@ -65,7 +65,13 @@ class AppController
         $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache'], $this->settings['feed']['extra_fields']);
         $products = $feedReader->getProducts();
         $args['productsCount'] = count($products);
-        $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products,0,$this->settings['feed']['max_products_on_page']) : $products;
+        $queryParams = $request->getQueryParams();
+        $offset = 0;
+        if(!empty($queryParams['page']) && intval($queryParams['page'])>1){
+            $offset = ($queryParams['page']-1) * $this->settings['feed']['max_products_on_page'];
+        }
+
+        $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products,$offset,$this->settings['feed']['max_products_on_page']) : $products;
         $args['productsShow'] = count($args['products']);
 
         return $this->render($response, 'products.twig', $args);
@@ -102,7 +108,8 @@ class AppController
         } else {
             $cart = [];
         }
-        $cart[$args['id']] = isset($cart[$args['id']]) ? $cart[$args['id']]+1 : 1;
+        $quantity = intval($request->getBody()->getContents());
+        $cart[$args['id']] = isset($cart[$args['id']]) ? $cart[$args['id']]+$quantity : $quantity;
         $this->session->cart = serialize($cart);
 
         return $response->withJson(['productCount' => array_sum($cart)], 200);

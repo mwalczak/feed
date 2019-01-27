@@ -10,7 +10,7 @@ $app->get('/products', AppController::class . ':productsAction');
 
 $app->get('/product/{id}', AppController::class . ':productAction')->setName('product');
 
-$app->get('/product/{id}/add', AppController::class . ':productAddAction')->setName('product-add');
+$app->post('/product/{id}/add', AppController::class . ':productAddAction')->setName('product-add');
 
 $app->post('/product/{id}/quantity', AppController::class . ':productQuantityAction')->setName('product-quantity');
 

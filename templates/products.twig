@@ -3,27 +3,29 @@
 {% block title %}Products{% endblock %}
 {% block content %}
     <h1>Products page</h1>
-    <h4>Products: {{ productsShow }} / {{ productsCount }}</h4>
-    <div class="products">
+    <h4>Total number of products: {{ productsCount }}</h4>
+    <div class="products" data-infinite-scroll='{ "path": "products?page={{ '{{' }}#{{ '}}' }}.html", "append": ".product", "history": false, "status": ".page-load-status" }'>
         {% for product in products %}
             <div class="product">
                 <a href="{{ path_for('product', { 'id': product.id }) }}">
                     <p class="name">{{ product.title }}</p>
-                    <p class="img"><img class="lazy" data-src="{{ product.image_link }}" alt="{{ product.title }}"/></p>
+                    <p class="img"><img src="{{ product.image_link }}" alt="{{ product.title }}"/></p>
                 </a>
                 <p class="price">Cena: <span>{{ product.price }}</span></p>
                 <i class="fas fa-cart-plus add-to-cart" title="add to cart" data-product-id="{{ product.id }}"></i>
             </div>
         {% endfor %}
     </div>
+    <div class="page-load-status">
+        <p class="infinite-scroll-request">Loading...</p>
+        <p class="infinite-scroll-last"></p>
+        <p class="infinite-scroll-error"></p>
+    </div>
 {% endblock %}
 
 {% block script %}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/vanilla-lazyload@10.19.0/dist/lazyload.min.js"></script>
+    <script type="text/javascript" src="/infinite-scroll.pkgd.min.js"></script>
     <script type="text/javascript">
-        var myLazyLoad = new LazyLoad({
-            elements_selector: ".lazy"
-        });
         document.addEventListener('click', function (e) {
             if (e.srcElement.classList.contains('add-to-cart')) {
                 const productId = e.srcElement.dataset.productId;
@@ -36,8 +38,8 @@
                         document.getElementById("cart_count").innerHTML = ret.productCount;
                     }
                 };
-                xhttp.open("GET", "/product/" + productId + "/add", true);
-                xhttp.send();
+                xhttp.open("POST", "/product/" + productId + "/add", true);
+                xhttp.send("1");
             }
         });
     </script>
