@@ -28,7 +28,7 @@ Paste your optional javascript in:
     templates/script
    
 ## What's new
-2019-01-27
+2019-01-28
 
 Missing cache fallback for PWA
 
