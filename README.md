@@ -30,6 +30,10 @@ Paste your optional javascript in:
 ## What's new
 2019-01-27
 
+Missing cache fallback for PWA
+
+2019-01-27
+
 Pagination, frontend performance, first PWA
 
 2019-01-24
