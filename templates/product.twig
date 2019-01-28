@@ -1,23 +1,19 @@
-{% extends "layout.html" %}
+{% extends "layout.twig" %}
 
 {% block title %}Product{% endblock %}
 {% block content %}
 <h1>Product page</h1>
 <div class="product">
-    {% if product is empty %}
-        <p>Product information isn't available - come back when online</p>
-    {% else %}
-        <a href="{{ path_for('product', { 'id': product.id }) }}">
-            <p class="name">{{ product.title }}</p>
-            <p class="img"><img src="{{ product.image_link }}"/></p>
-            <p class="price">Cena: <span>{{ product.price }}</span></p>
-        </a>
-        <i class="fas fa-cart-plus add-to-cart" title="add to cart"></i>
-        <p class="description">{{ product.description }}</p>
-        {% for field in extraFields %}
-            <p class="description" data-field="{{field.name}}"><span>{{field.name}}</span>: {{ field.value }}</p>
-        {% endfor %}
-    {% endif %}
+    <a href="{{ path_for('product', { 'id': product.id }) }}">
+        <p class="name">{{ product.title }}</p>
+        <p class="img"><img src="{{ product.image_link }}"/></p>
+        <p class="price">Cena: <span>{{ product.price }}</span></p>
+    </a>
+    <i class="fas fa-cart-plus add-to-cart" title="add to cart"></i>
+    <p class="description">{{ product.description }}</p>
+    {% for field in extraFields %}
+        <p class="description" data-field="{{field.name}}"><span>{{field.name}}</span>: {{ field.value }}</p>
+    {% endfor %}
 </div>
 {% endblock %}
 

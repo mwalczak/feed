@@ -28,3 +28,5 @@ $app->get('/checkout', AppController::class . ':checkoutAction')->setName('check
 
 $app->post('/session', AppController::class . ':sessionAction')->setName('session');
 
+$app->get('/fallback', AppController::class . ':fallbackAction');
+

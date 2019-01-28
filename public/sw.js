@@ -1,36 +1,21 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 
 // Note: Ignore the error that Glitch raises about workbox being undefined.
 workbox.skipWaiting();
 workbox.clientsClaim();
 
 workbox.routing.registerRoute(
-    /(\/|\/\?utm_source=a2hs|\/products.*)$/,
-    workbox.strategies.staleWhileRevalidate()
-);
-
-const FALLBACK_PRODUCT_URL = '/product/0';
-
-workbox.routing.registerRoute(
-    /\/product\/.+$/,
-    async ({event}) => {
-        try {
-            return await workbox.strategies.cacheFirst().handle({event});
-        } catch (error) {
-            console.log("Fallback route: "+FALLBACK_PRODUCT_URL);
-            const cacheName = workbox.core.cacheNames.runtime;
-            return caches.match(FALLBACK_PRODUCT_URL);
-        }
-    }
-);
-
-workbox.routing.registerRoute(
-    /.+\.(?:js|css|woff2|webmanifest)$/,
+    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*)$'),
     workbox.strategies.staleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
-    /\.(?:png|gif|jpg|jpeg|svg).*$/,
+    new RegExp('.+\\.(?:js|css|woff2|webmanifest)$'),
+    workbox.strategies.staleWhileRevalidate()
+);
+
+workbox.routing.registerRoute(
+    new RegExp('\\.(?:png|gif|jpg|jpeg|svg).*$'),
     workbox.strategies.cacheFirst({
         cacheName: 'images',
         plugins: [
@@ -43,7 +28,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-    /.+\.(?:png|gif|jpg|jpeg|svg).*$/,
+    new RegExp('.+\\.(?:png|gif|jpg|jpeg|svg).*$'),
     workbox.strategies.cacheFirst({
         cacheName: 'images',
         plugins: [
@@ -58,9 +43,39 @@ workbox.routing.registerRoute(
     })
 );
 
+// Use a stale-while-revalidate strategy for all other requests.
+workbox.routing.setDefaultHandler(
+    workbox.strategies.staleWhileRevalidate()
+);
+
+// This "catch" handler is triggered when any of the other routes fail to
+// generate a response.
+workbox.routing.setCatchHandler(({event}) => {
+    // Use event, request, and url to figure out how to respond.
+    // One approach would be to use request.destination, see
+    // https://medium.com/dev-channel/service-worker-caching-strategies-based-on-request-types-57411dd7652c
+    switch (event.request.destination) {
+        case 'document':
+            return caches.match('/fallback');
+            break;
+        //
+        // case 'image':
+        //     return caches.match(FALLBACK_IMAGE_URL);
+        //     break;
+        //
+        // case 'font':
+        //     return caches.match(FALLBACK_FONT_URL);
+        //     break;
+
+        default:
+            // If we don't have a fallback, just return an error response.
+            return Response.error();
+    }
+});
+
 self.addEventListener('install', (event) => {
     console.log('WS Installed - warm up');
-    const urls = ['/product/0'];
+    const urls = ['/fallback'];
     const cacheName = workbox.core.cacheNames.runtime;
     event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
 });
@@ -72,6 +87,6 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "style.css",
-    "revision": "9323844d69c8cf9d1feaa4134591a161"
+    "revision": "72dbead8619170e80cba9d081d9a43ba"
   }
 ]);
