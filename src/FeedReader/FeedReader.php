@@ -34,9 +34,11 @@ class FeedReader
             foreach($item->children("g", true) as $attribute=>$value){
                 $product[$attribute] = (string) $value;
             }
-            foreach($this->extraFields as $namespace=>$fields){
-                foreach($item->children($namespace, true) as $attribute=>$value){
-                    $product[$attribute] = (string) $value;
+            if(is_array($this->extraFields)){
+                foreach($this->extraFields as $namespace=>$fields){
+                    foreach($item->children($namespace, true) as $attribute=>$value){
+                        $product[$attribute] = (string) $value;
+                    }
                 }
             }
             foreach($item->children() as $attribute=>$value){

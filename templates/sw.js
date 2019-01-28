@@ -65,13 +65,4 @@ self.addEventListener('install', (event) => {
     event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
 });
 
-workbox.precaching.precacheAndRoute([
-  {
-    "url": "lib.js",
-    "revision": "cd275eef931f83ea0e31beab6bbe8d49"
-  },
-  {
-    "url": "style.css",
-    "revision": "9323844d69c8cf9d1feaa4134591a161"
-  }
-]);
+workbox.precaching.precacheAndRoute([]);
