@@ -28,14 +28,11 @@ a {
     border: 1px solid #067e25;
     padding: 20px;
     margin: auto;
+    min-height: 373px;
 }
 
 .price span {
     color: #067e25;
-}
-
-a {
-    color: #636363;
 }
 
 .products .product {
@@ -50,6 +47,7 @@ a {
 
 .products .product img {
     max-width: 160px;
+    max-height: 160px;
 }
 
 .product img {
