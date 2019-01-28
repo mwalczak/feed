@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Products page</h1>
     <h4>Total number of products: {{ productsCount }}</h4>
-    <div class="products" data-infinite-scroll='{ "path": "products?page={{ '{{' }}#{{ '}}' }}.html", "append": ".product", "history": false, "status": ".page-load-status" }'>
+    <div class="products" data-infinite-scroll='{ "path": "products?page={{ '{{' }}#{{ '}}' }}", "append": ".product", "history": false, "status": ".page-load-status" }'>
         {% for product in products %}
             <div class="product">
                 <a href="{{ path_for('product', { 'id': product.id }) }}">
@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block script %}
-    <script type="text/javascript" src="/infinite-scroll.pkgd.min.js"></script>
+    <script type="text/javascript" src="//unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
     <script type="text/javascript">
         document.addEventListener('click', function (e) {
             if (e.srcElement.classList.contains('add-to-cart')) {

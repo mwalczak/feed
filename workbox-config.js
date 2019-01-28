@@ -39,7 +39,7 @@ module.exports = {
             },
         },
         {
-            urlPattern: /\.(?:js|css|woff2|webmanifest)$/,
+            urlPattern: /.+\.(?:js|css|woff2|webmanifest)$/,
             handler: 'staleWhileRevalidate',
             options: {
                 cacheName: 'static-resources'
