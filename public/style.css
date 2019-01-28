@@ -34,6 +34,12 @@ a {
     color: #067e25;
 }
 
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .products .product {
     width: 200px;
     margin: 0 10px 20px 0;
