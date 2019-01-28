@@ -36,8 +36,7 @@ a {
 
 .products .product {
     width: 200px;
-    height: 400px;
-    margin-bottom: 20px;
+    margin: 0 10px 20px 0;
 }
 
 .products .product .name {
@@ -51,6 +50,14 @@ a {
 
 .product img {
     max-width: 280px;
+    vertical-align: middle;
+}
+
+.product .img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 164px;
 }
 
 #header {
