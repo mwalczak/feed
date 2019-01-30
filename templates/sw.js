@@ -11,7 +11,7 @@ workbox.routing.setDefaultHandler(
 
 workbox.routing.registerRoute(
     new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*)$'),
-    workbox.strategies.staleWhileRevalidate()
+    workbox.strategies.networkFirst()
 );
 
 workbox.routing.registerRoute(
