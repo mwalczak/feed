@@ -32,6 +32,10 @@ Paste your optional javascript in:
     templates/script
    
 ## What's new
+2019-02-03
+
+Offline cart and sync with server when online
+
 2019-01-28
 
 Missing cache fallback for PWA
