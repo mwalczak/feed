@@ -4,14 +4,15 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 workbox.skipWaiting();
 workbox.clientsClaim();
 
-// Use a stale-while-revalidate strategy for all other requests.
-workbox.routing.setDefaultHandler(
-    workbox.strategies.networkFirst()
-);
-
 workbox.routing.registerRoute(
-    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*)$'),
-    workbox.strategies.networkFirst()
+    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*|\\/cart|\\/registration|\\/delivery|\\/payment|\\/checkout)$'),
+    async ({event}) => {
+        return await workbox.strategies.networkFirst().handle({event})
+            .then((response) => {
+                return response || caches.match('/fallback');
+            })
+            .catch((error) => caches.match('/fallback'));
+    }
 );
 
 workbox.routing.registerRoute(
@@ -48,6 +49,10 @@ workbox.routing.registerRoute(
     })
 );
 
+// Use a stale-while-revalidate strategy for all other requests.
+workbox.routing.setDefaultHandler(
+    workbox.strategies.staleWhileRevalidate()
+);
 
 
 // This "catch" handler is triggered when any of the other routes fail to
@@ -58,6 +63,7 @@ workbox.routing.setCatchHandler(({event}) => {
     // https://medium.com/dev-channel/service-worker-caching-strategies-based-on-request-types-57411dd7652c
     switch (event.request.destination) {
         case 'document':
+            console.log("test fallback");
             return caches.match('/fallback');
             break;
         //
