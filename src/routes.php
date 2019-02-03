@@ -34,3 +34,4 @@ $app->get('/fallback', AppController::class . ':fallbackAction');
 
 $app->get('/manifest', AppController::class . ':manifestAction');
 
+$app->put('/geolocation', AppController::class . ':geoLocationAction');

@@ -270,4 +270,13 @@ class AppController
         }
         return $response->withJson($manifest);
     }
+
+    public function geoLocationAction(Request $request, Response $response, array $args)
+    {
+        $geo = json_decode($request->getBody()->getContents());
+
+        $this->logger->info("Feed 'geoLocation' route: session - ".$this->session::id()." geo - " .print_r($geo, true));
+
+        return $response->withStatus(200);
+    }
 }

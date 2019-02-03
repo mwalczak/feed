@@ -53,6 +53,16 @@
         });
         window.addEventListener('online', onlineStatus);
         window.addEventListener('offline', offlineStatus);
+        var isPWAinBrowser = true;
+        // replace standalone with fullscreen or minimal-ui according to your manifest
+        if (matchMedia('(display-mode: standalone)').matches) {
+            // Android and iOS 11.3+
+            isPWAinBrowser = false;
+        } else if ('standalone' in navigator) {
+            // useful for iOS < 11.3
+            isPWAinBrowser = !navigator.standalone;
+        }
+        getLocation();
     }
 </script>
 {% block script %}{% endblock %}
