@@ -4,6 +4,11 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 workbox.skipWaiting();
 workbox.clientsClaim();
 
+// Use a stale-while-revalidate strategy for all other requests.
+workbox.routing.setDefaultHandler(
+    workbox.strategies.staleWhileRevalidate()
+);
+
 workbox.routing.registerRoute(
     new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*|\\/cart|\\/registration|\\/delivery|\\/payment|\\/checkout)$'),
     async ({event}) => {
@@ -13,11 +18,6 @@ workbox.routing.registerRoute(
             })
             .catch((error) => caches.match('/fallback'));
     }
-);
-
-workbox.routing.registerRoute(
-    new RegExp('.+\\.(?:js|css|woff2|webmanifest)$'),
-    workbox.strategies.staleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
@@ -47,11 +47,6 @@ workbox.routing.registerRoute(
             })
         ],
     })
-);
-
-// Use a stale-while-revalidate strategy for all other requests.
-workbox.routing.setDefaultHandler(
-    workbox.strategies.staleWhileRevalidate()
 );
 
 

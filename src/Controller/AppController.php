@@ -241,4 +241,14 @@ class AppController
         $args['fallback'] = true;
         return $this->renderer->render($response, 'layout.twig', $args);
     }
+
+    public function manifestAction(Request $request, Response $response, array $args)
+    {
+        $manifest = json_decode(file_get_contents($this->settings['renderer']['template_path']."site.webmanifest"));
+        if(!empty($this->settings['appName'])){
+            $manifest->name = $this->settings['appName'];
+            $manifest->short_name = $this->settings['appName'];
+        }
+        return $response->withJson($manifest);
+    }
 }

@@ -30,3 +30,5 @@ $app->post('/session', AppController::class . ':sessionAction')->setName('sessio
 
 $app->get('/fallback', AppController::class . ':fallbackAction');
 
+$app->get('/manifest', AppController::class . ':manifestAction');
+
