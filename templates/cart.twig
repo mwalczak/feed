@@ -72,8 +72,9 @@
                 document.getElementById("cart").style.display = "none";
                 document.getElementById("cart_sync_loader").style.display = "block";
                 let cart = new Cart();
-                cart.syncStorage();
-                document.location.href = "/cart";
+                cart.syncStorage(function(){
+                    document.location.href = "/cart";
+                });
             });
         }
 

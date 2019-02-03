@@ -10,7 +10,7 @@ workbox.routing.setDefaultHandler(
 );
 
 workbox.routing.registerRoute(
-    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*|\\/cart|\\/registration|\\/delivery|\\/payment|\\/checkout)$'),
+    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*|\\/product.*|\\/cart|\\/registration|\\/delivery|\\/payment|\\/checkout)$'),
     async ({event}) => {
         return await workbox.strategies.networkFirst().handle({event})
             .then((response) => {

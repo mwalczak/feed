@@ -10,7 +10,7 @@ workbox.routing.setDefaultHandler(
 );
 
 workbox.routing.registerRoute(
-    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*|\\/cart|\\/registration|\\/delivery|\\/payment|\\/checkout)$'),
+    new RegExp('(\\/|\\/\\?utm_source=a2hs|\\/products.*|\\/product.*|\\/cart|\\/registration|\\/delivery|\\/payment|\\/checkout)$'),
     async ({event}) => {
         return await workbox.strategies.networkFirst().handle({event})
             .then((response) => {
@@ -86,14 +86,14 @@ self.addEventListener('install', (event) => {
 workbox.precaching.precacheAndRoute([
   {
     "url": "cart.js",
-    "revision": "5fac3e0d2fdf9fdc30aa4403ac30b341"
+    "revision": "52f77c1cd7cd18fdf8488e4cb38e9654"
   },
   {
     "url": "lib.js",
-    "revision": "795f36c521cbb030ff5ea676dd02ca8b"
+    "revision": "c0fd728db259f19c7df323558bc37a4a"
   },
   {
     "url": "style.css",
-    "revision": "f3848de17ab32bdea8ddf493ec83bf03"
+    "revision": "339f29e4bc25a3b50d8e6b126e226962"
   }
 ]);

@@ -146,6 +146,25 @@ class AppController
         return $response->withStatus(200);
     }
 
+    public function cartUpdateAction(Request $request, Response $response, array $args)
+    {
+        if (isset($this->session->cart)) {
+            $cart = unserialize($this->session->cart);
+        } else {
+            $cart = [];
+        }
+        $parsedBody = json_decode($request->getBody()->getContents(), true);
+        $this->logger->info("Feed 'cart' route - payload:" . print_r($parsedBody, true));
+
+        foreach ($parsedBody as $productId => $quantity) {
+            $cart[$productId] = $quantity;
+        }
+        $this->logger->info("Updated cart:" . serialize($cart));
+        $this->session->cart = serialize($cart);
+
+        return $response->withStatus(200);
+    }
+
     public function productRemoveAction(Request $request, Response $response, array $args)
     {
         $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
@@ -244,8 +263,8 @@ class AppController
 
     public function manifestAction(Request $request, Response $response, array $args)
     {
-        $manifest = json_decode(file_get_contents($this->settings['renderer']['template_path']."site.webmanifest"));
-        if(!empty($this->settings['appName'])){
+        $manifest = json_decode(file_get_contents($this->settings['renderer']['template_path'] . "site.webmanifest"));
+        if (!empty($this->settings['appName'])) {
             $manifest->name = $this->settings['appName'];
             $manifest->short_name = $this->settings['appName'];
         }

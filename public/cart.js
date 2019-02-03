@@ -1,5 +1,5 @@
 class Cart {
-    constructor(){
+    constructor() {
         this.storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
     }
 
@@ -44,7 +44,7 @@ class Cart {
             xhttp.send(quantity);
         } else {
             console.log("offline");
-            if(this.storage[productId] === undefined){
+            if (this.storage[productId] === undefined) {
                 this.storage[productId] = 1;
             } else {
                 this.storage[productId]++;
@@ -60,8 +60,6 @@ class Cart {
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     console.log("Product " + productId + " quantity changed: " + quantity);
-                    let cart = new Cart();
-                    cart.removeFromStorage(productId);
                     Cart.calc();
                 }
             };
@@ -93,32 +91,46 @@ class Cart {
         }
     }
 
-    removeFromStorage(productId){
-        if(this.storage[productId] !== undefined) {
+    removeFromStorage(productId) {
+        if (this.storage[productId] !== undefined) {
             delete this.storage[productId];
             this.updateStorage();
         }
     }
 
     updateStorage() {
-        console.log("saving cart to locastorage: "+JSON.stringify(this.storage));
+        console.log("saving cart to locastorage: " + JSON.stringify(this.storage));
         localStorage.setItem('cart', JSON.stringify(this.storage));
     }
 
     checkStorage() {
-        console.log("check cart: "+Object.keys(this.storage).length);
+        console.log("check cart: " + Object.keys(this.storage).length);
         return Object.keys(this.storage).length;
     }
 
-    syncStorage() {
-        if(Object.keys(this.storage).length){
-            console.log("sending cart to server: "+JSON.stringify(this.storage));
-            for(let productId in this.storage){
-                if (this.storage.hasOwnProperty(productId)) {
-                    console.log(productId +" : "+this.storage[productId]);
-                    this.change(productId, this.storage[productId])
+    clearStorage() {
+        this.storage = {};
+        this.updateStorage();
+    }
+
+    syncStorage(callback) {
+        if (Object.keys(this.storage).length && navigator.onLine) {
+            let cart = JSON.stringify(this.storage);
+            console.log("sending cart to server: " + cart);
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    console.log("cart was synced");
+                    let cart = new Cart();
+                    cart.clearStorage();
+                    if (callback !== undefined) {
+                        callback();
+                    }
                 }
-            }
+            };
+            xhttp.open("PUT", "/cart", true);
+            xhttp.send(cart);
         }
     }
 

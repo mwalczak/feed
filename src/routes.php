@@ -28,6 +28,8 @@ $app->get('/checkout', AppController::class . ':checkoutAction')->setName('check
 
 $app->post('/session', AppController::class . ':sessionAction')->setName('session');
 
+$app->put('/cart', AppController::class . ':cartUpdateAction');
+
 $app->get('/fallback', AppController::class . ':fallbackAction');
 
 $app->get('/manifest', AppController::class . ':manifestAction');
