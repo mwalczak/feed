@@ -90,7 +90,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "lib.js",
-    "revision": "c0fd728db259f19c7df323558bc37a4a"
+    "revision": "a5778019c31bc44892b68f5730a12482"
   },
   {
     "url": "style.css",
