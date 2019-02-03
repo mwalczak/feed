@@ -19,6 +19,10 @@ Configure your product feed url in settings.php
         'url' => 'http://feed.url'
     ]
 
+[Optional] Configure your app name in settings.php for PWA
+    
+    'appName' => 'My Feed',
+
 Run php server or setup your vhost configuration to /public
     
     php -S localhost:8080 -t public
