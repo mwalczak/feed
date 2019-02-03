@@ -37,6 +37,7 @@
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.6.3/css/solid.css" integrity="sha384-+0VIRx+yz1WBcCTXBkVQYIBVNEFH1eP6Zknm16roZCyeNg2maWEpk/l/KsyFKs7G" crossorigin="anonymous">
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.6.3/css/fontawesome.css" integrity="sha384-jLuaxTTBR42U2qJ/pm4JRouHkEDHkVqH0T1nyQXn1mZ7Snycpf6Rl25VBNthU4z0" crossorigin="anonymous">
 <script src='/lib.js'></script>
+<script src='/cart.js'></script>
 <script>
     // Check that service workers are registered
     if ('serviceWorker' in navigator) {
@@ -50,6 +51,8 @@
                     console.log('Service worker registration failed, error:', error);
                 });
         });
+        window.addEventListener('online', onlineStatus);
+        window.addEventListener('offline', offlineStatus);
     }
 </script>
 {% block script %}{% endblock %}

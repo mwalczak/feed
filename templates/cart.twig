@@ -4,6 +4,8 @@
 {% block content %}
     <h1>Cart page</h1>
     <h4>Total products: <span id="product_count">{{ cart|length }}</span></h4>
+    <div id="unsaved_storage" class="alert">You have unsaved products in your cart - <a id="sync_storage" href="#sync">click to update</a></div>
+    <div class="loader" id="cart_sync_loader" style="display: none"></div>
     <table class="cart" id="cart">
         <thead>
         <tr>
@@ -47,15 +49,8 @@
             inputs[i].addEventListener('change', function (e) {
                 let quantity = e.srcElement.value;
                 let productId = e.srcElement.dataset.productId;
-                let xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log("Product " + productId + " quantity changed: " + quantity);
-                        calc_cart();
-                    }
-                };
-                xhttp.open("POST", "/product/" + productId + "/quantity", true);
-                xhttp.send(quantity);
+                let cart = new Cart();
+                cart.change(productId, quantity);
             });
         }
 
@@ -63,19 +58,25 @@
         for (let i = 0; i < removes.length; i++) {
             removes[i].addEventListener('click', function (e) {
                 let productId = e.srcElement.dataset.productId;
-                let xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log("Product " + productId + " removed");
-                        let row = e.srcElement.parentNode.parentNode;
-                        row.parentNode.removeChild(row);
-                        calc_cart();
-                    }
-                };
-                xhttp.open("DELETE", "/product/" + productId, true);
-                xhttp.send();
+                let cart = new Cart();
+                cart.remove(productId, e.srcElement.parentNode.parentNode);
             });
         }
+        if(navigator.onLine){
+            let cart = new Cart();
+            if(cart.checkStorage()){
+                document.getElementById("unsaved_storage").style.display = "inline-block";
+            }
+            document.getElementById("sync_storage").addEventListener('click', function (e) {
+                e.preventDefault();
+                document.getElementById("cart").style.display = "none";
+                document.getElementById("cart_sync_loader").style.display = "block";
+                let cart = new Cart();
+                cart.syncStorage();
+                document.location.href = "/cart";
+            });
+        }
+
     </script>
     {% include 'script/cart.twig' %}
 {% endblock %}

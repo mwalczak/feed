@@ -29,17 +29,8 @@
         document.addEventListener('click', function (e) {
             if (e.srcElement.classList.contains('add-to-cart')) {
                 const productId = e.srcElement.dataset.productId;
-                const xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        const ret = JSON.parse(this.responseText);
-                        console.log("Product {{ product.id }} added to cart, total products: "+ ret.productCount);
-                        shake_cart();
-                        document.getElementById("cart_count").innerHTML = ret.productCount;
-                    }
-                };
-                xhttp.open("POST", "/product/" + productId + "/add", true);
-                xhttp.send("1");
+                let cart = new Cart();
+                cart.add(productId, 1);
             }
         });
     </script>

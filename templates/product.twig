@@ -20,19 +20,8 @@
 {% block script %}
     <script type="text/javascript">
         document.addEventListener('click', function(e){
-            if(e.srcElement.classList.contains('add-to-cart')){
-                const xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        const ret = JSON.parse(this.responseText);
-                        console.log("Product {{ product.id }} added to cart, total products: "+ ret.productCount);
-                        shake_cart();
-                        document.getElementById("cart_count").innerHTML = ret.productCount;
-                    }
-                };
-                xhttp.open("POST", "{{ path_for('product-add', { 'id': product.id }) }}", true);
-                xhttp.send("1");
-            }
+            let cart = new Cart();
+            cart.add('{{ product.id }}', 1);
         });
     </script>
     {% include 'script/product.twig' %}
