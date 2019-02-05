@@ -86,7 +86,7 @@ self.addEventListener('install', (event) => {
 workbox.precaching.precacheAndRoute([
   {
     "url": "cart.js",
-    "revision": "52f77c1cd7cd18fdf8488e4cb38e9654"
+    "revision": "3d245dc9fa7b7dae313814314223f3fd"
   },
   {
     "url": "lib.js",
