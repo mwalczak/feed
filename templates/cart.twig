@@ -3,7 +3,7 @@
 {% block title %}Cart{% endblock %}
 {% block content %}
     <h1>Cart page</h1>
-    <h4>Total products: <span id="product_count">{{ cart|length }}</span></h4>
+    <h4>Total products: <span id="product_count">{{ cartCount }}</span></h4>
     <div id="unsaved_storage" class="alert">You have unsaved products in your cart - <a id="sync_storage" href="#sync">click to update</a></div>
     <div class="loader" id="cart_sync_loader" style="display: none"></div>
     <table class="cart" id="cart">
