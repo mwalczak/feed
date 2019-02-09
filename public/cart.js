@@ -26,7 +26,7 @@ class Cart {
         }
         document.getElementById("cart_total").innerHTML = cart_total;
         document.getElementById("cart_count").innerHTML = cart_count;
-        document.getElementById("product_count").innerHTML = rows.length;
+        document.getElementById("product_count").innerHTML = cart_count;
     }
 
     add(productId, quantity) {

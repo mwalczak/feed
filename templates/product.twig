@@ -20,8 +20,10 @@
 {% block script %}
     <script type="text/javascript">
         document.addEventListener('click', function(e){
-            let cart = new Cart();
-            cart.add('{{ product.id }}', 1);
+            if(e.srcElement.classList.contains('add-to-cart')) {
+                let cart = new Cart();
+                cart.add('{{ product.id }}', 1);
+            }
         });
     </script>
     {% include 'script/product.twig' %}
