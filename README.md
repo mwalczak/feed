@@ -31,6 +31,20 @@ Paste your optional javascript in:
 
     templates/script
    
+## Dev dependencies
+PHP 7.x
+
+Nodejs 8+
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04
+
+Service workers and cache - Workbox CLI
+
+https://developers.google.com/web/tools/workbox/modules/workbox-cli
+
+To rebuild service workers use injectManifest mode:
+
+    workbox injectManifest workbox-config.js
+   
 ## What's new
 2019-02-03
 
