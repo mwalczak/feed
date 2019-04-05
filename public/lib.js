@@ -1,5 +1,11 @@
 function onlineStatus(){
     console.log("User switched to online");
+    let cart = new Cart();
+    if(cart.checkStorage()){
+        cart.syncStorage(function(){
+            console.log("Cart updated");
+        });
+    }
 }
 
 function offlineStatus(){

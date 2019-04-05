@@ -72,9 +72,9 @@ class AppController
         $offset = 0;
         if (!empty($queryParams['page']) && intval($queryParams['page']) > 1) {
             $offset = ($queryParams['page'] - 1) * $this->settings['feed']['max_products_on_page'];
-        }
-        if ($offset > $args['productsCount']) {
-            return $response->withStatus(204, "no more products");
+            if ($offset >= $args['productsCount'] || empty($this->settings['feed']['max_products_on_page'])) {
+                return $response->withStatus(204, "no more products");
+            }
         }
 
         $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products, $offset, $this->settings['feed']['max_products_on_page']) : $products;
