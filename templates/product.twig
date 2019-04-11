@@ -1,6 +1,17 @@
 {% extends "layout.twig" %}
 
 {% block title %}Product{% endblock %}
+{% block head %}
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="{{ product.title }}">
+    <meta property="og:description" content="{{ product.description }}">
+    <meta property="og:url" content="{{ path_for('product', { 'id': product.id }) }}">
+    <meta property="og:image" content="{{ product.image_link }}">
+    <meta property="product:price:amount" content="{{ product.price }}">
+    <meta property="product:price:currency" content="{{ currency }}">
+    <meta property="product:retailer_item_id" content="{{ product.id }}">
+    <!-- End Open Graph Metadata -->
+{% endblock %}
 {% block content %}
 <h1>Product page</h1>
 <div class="product">

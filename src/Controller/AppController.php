@@ -48,6 +48,7 @@ class AppController
     {
         $args['appName'] = $this->settings['appName'];
         $args['cacheTime'] = ($this->settings['feed']['cache'] && is_file($this->settings['feed']['cache'])) ? filemtime($this->settings['feed']['cache']) : time();
+        $args['currency'] = $this->settings['currency'];
 
         $args['sessionId'] = $this->session::id();
         $args['email'] = $this->session->email;
