@@ -2,7 +2,9 @@
     document.addEventListener('click', function(e){
         if(e.srcElement.classList.contains('add-to-cart')){
             const productId = e.srcElement.dataset.productId;
-            fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_added_product&product_id='+productId+'&quantity=1');
+            fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_added_product&product_id='+productId+'&quantity=1',{
+                credentials: 'include'
+            });
         }
     });
 </script>
