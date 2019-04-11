@@ -28,5 +28,10 @@ return [
                 //'ns2' => ['Country', 'Duration', 'City', 'RoomDescription']
             ]
         ],
+
+        //Integrations
+        'sarehub_pixel' => [
+            'domain' => ''
+        ]
     ],
 ];

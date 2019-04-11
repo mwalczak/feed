@@ -1,0 +1,17 @@
+<img height="1" width="1" src="https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_checkout_summary">
+<script type="text/javascript">
+    document.addEventListener('click', function(e){
+        if(e.srcElement.classList.contains('product_remove')){
+            const productId = e.srcElement.dataset.productId;
+            fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_removed_product&product_id='+productId);
+        }
+    });
+
+    document.addEventListener('change', function(e){
+        if(e.srcElement.classList.contains('product_quantity')){
+            const quantity = e.srcElement.value;
+            const productId = e.srcElement.dataset.productId;
+            fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_changed_product_quantity&product_id='+productId+'&quantity='+quantity);
+        }
+    });
+</script>

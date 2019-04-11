@@ -80,4 +80,7 @@
 
     </script>
     {% include 'script/cart.twig' %}
+    {% if sarehub_pixel.domain %}
+        {% include 'script/sarehub_pixel/cart.twig' %}
+    {% endif %}
 {% endblock %}

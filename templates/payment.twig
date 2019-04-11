@@ -10,4 +10,7 @@
 
 {% block script %}
     {% include 'script/payment.twig' %}
+    {% if sarehub_pixel.domain %}
+        {% include 'script/sarehub_pixel/payment.twig' %}
+    {% endif %}
 {% endblock %}

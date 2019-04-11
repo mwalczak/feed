@@ -17,4 +17,7 @@
         getLocation();
     </script>
     {% include 'script/registration.twig' %}
+    {% if sarehub_pixel.domain %}
+        {% include 'script/sarehub_pixel/registration.twig' %}
+    {% endif %}
 {% endblock %}

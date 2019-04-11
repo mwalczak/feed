@@ -44,6 +44,10 @@ class AppController
         $this->settings = $container->get("settings");
     }
 
+    private function getIntegrationSettings(&$args){
+        $args['sarehub_pixel'] = $this->settings['sarehub_pixel'];
+    }
+
     private function render(Response $response, string $template, array $args)
     {
         $args['appName'] = $this->settings['appName'];
@@ -58,6 +62,8 @@ class AppController
             $args['cartProducts'] = implode(",", array_keys($cart));
             $args['cartQuantities'] = implode(",", array_values($cart));
         }
+
+        $this->getIntegrationSettings($args);
 
         return $this->renderer->render($response, $template, $args);
     }
@@ -241,6 +247,7 @@ class AppController
         if (!empty($this->session->cart)) {
             $this->countCartTotal($args);
             $args['sessionId'] = $this->session::id();
+            $this->getIntegrationSettings($args);
             unset($this->session->cart);
             $this->session::destroy();
         }

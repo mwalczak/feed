@@ -14,4 +14,7 @@
 
 {% block script %}
     {% include 'script/checkout.twig' %}
+    {% if sarehub_pixel.domain %}
+        {% include 'script/sarehub_pixel/checkout.twig' %}
+    {% endif %}
 {% endblock %}
