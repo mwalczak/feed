@@ -63,6 +63,9 @@
         }
     }
 </script>
+{% if sarehub_pixel.domain %}
+    {% include 'script/sarehub_pixel/layout.twig' %}
+{% endif %}
 {% if sarehub_js.domain %}
     {% include 'script/sarehub_js/layout.twig' %}
 {% endif %}
