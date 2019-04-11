@@ -7,6 +7,7 @@
     {% if sessionId is empty %}
         <p>No cart found, please annd products to cart and click purchase again</p>
     {% else %}
+        <p>Cart summary: {{ total }} pln</p>
         <p>Cart id: {{ sessionId }} was cleaned after purchase confirmation</p>
     {% endif %}
 {% endblock %}

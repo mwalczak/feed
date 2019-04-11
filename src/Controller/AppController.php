@@ -188,9 +188,7 @@ class AppController
         return $response->withStatus(200);
     }
 
-    public function cartAction(Request $request, Response $response, array $args)
-    {
-        $this->logger->info("Feed 'cart' route");
+    private function countCartTotal(&$args){
         $total = 0;
         if (isset($this->session->cart)) {
             $feedReader = new FeedReader($this->settings['feed']['url'], $this->settings['feed']['cache']);
@@ -203,8 +201,14 @@ class AppController
         } else {
             $args['cart'] = [];
         }
-
         $args['total'] = $total;
+    }
+
+    public function cartAction(Request $request, Response $response, array $args)
+    {
+        $this->logger->info("Feed 'cart' route");
+
+        $this->countCartTotal($args);
 
         return $this->render($response, 'cart.twig', $args);
     }
@@ -235,6 +239,7 @@ class AppController
         $this->logger->info("Feed 'checkout' route - session:" . $this->session::id() . ", email:" . $this->session->email);
 
         if (!empty($this->session->cart)) {
+            $this->countCartTotal($args);
             $args['sessionId'] = $this->session::id();
             unset($this->session->cart);
             $this->session::destroy();
