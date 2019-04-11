@@ -5,7 +5,7 @@
     <!-- Open Graph Metadata -->
     <meta property="og:title" content="{{ product.title }}">
     <meta property="og:description" content="{{ product.description }}">
-    <meta property="og:url" content="{{ path_for('product', { 'id': product.id }) }}">
+    <meta property="og:url" content="{{ base_url() }}{{ path_for('product', { 'id': product.id }) }}">
     <meta property="og:image" content="{{ product.image_link }}">
     <meta property="product:price:amount" content="{{ product.price }}">
     <meta property="product:price:currency" content="{{ currency }}">
