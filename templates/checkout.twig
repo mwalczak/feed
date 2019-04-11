@@ -17,4 +17,7 @@
     {% if sarehub_pixel.domain %}
         {% include 'script/sarehub_pixel/checkout.twig' %}
     {% endif %}
+    {% if sarehub_js.domain %}
+        {% include 'script/sarehub_js/checkout.twig' %}
+    {% endif %}
 {% endblock %}

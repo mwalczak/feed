@@ -13,4 +13,7 @@
     {% if sarehub_pixel.domain %}
         {% include 'script/sarehub_pixel/payment.twig' %}
     {% endif %}
+    {% if sarehub_js.domain %}
+        {% include 'script/sarehub_js/payment.twig' %}
+    {% endif %}
 {% endblock %}

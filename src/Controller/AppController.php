@@ -46,6 +46,7 @@ class AppController
 
     private function getIntegrationSettings(&$args){
         $args['sarehub_pixel'] = $this->settings['sarehub_pixel'];
+        $args['sarehub_js'] = $this->settings['sarehub_js'];
     }
 
     private function render(Response $response, string $template, array $args)

@@ -63,6 +63,9 @@
         }
     }
 </script>
+{% if sarehub_js.domain %}
+    {% include 'script/sarehub_js/layout.twig' %}
+{% endif %}
 {% block script %}{% endblock %}
 </body>
 </html>

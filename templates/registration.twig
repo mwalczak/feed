@@ -20,4 +20,7 @@
     {% if sarehub_pixel.domain %}
         {% include 'script/sarehub_pixel/registration.twig' %}
     {% endif %}
+    {% if sarehub_js.domain %}
+        {% include 'script/sarehub_js/registration.twig' %}
+    {% endif %}
 {% endblock %}

@@ -13,4 +13,7 @@
     {% if sarehub_pixel.domain %}
         {% include 'script/sarehub_pixel/delivery.twig' %}
     {% endif %}
+    {% if sarehub_js.domain %}
+        {% include 'script/sarehub_js/delivery.twig' %}
+    {% endif %}
 {% endblock %}

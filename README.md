@@ -5,7 +5,7 @@ Use this application to simulate e-commerce platform based only on xml product f
 Supported feed types:
 - RSS Google Merchant - https://support.google.com/merchants/answer/160589?hl=pl
 
-## Install the Application
+## Install the application
 
 Run this command from the directory in which you want to install your new Slim Framework application.
 
@@ -30,6 +30,20 @@ Run php server or setup your vhost configuration to /public
 Paste your optional javascript in:
 
     templates/script
+    
+## Configure integrations:
+
+SAREhub tricking pixel
+
+    'sarehub_pixel' => [
+        'domain' => 'example.com'
+    ]
+
+SAREhub tracking javascript
+
+    'sarehub_js' => [
+        'domain' => 'example.com'
+    ]
    
 ## Dev dependencies
 PHP 7.x
@@ -46,6 +60,10 @@ To rebuild service workers use injectManifest mode:
     workbox injectManifest workbox-config.js
    
 ## What's new
+2019-04-11
+
+Opengraph (product meta) and SAREhub integrations
+
 2019-02-03
 
 Offline cart and sync with server when online

@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    //SAREhub Integration
+    sareX_params.tag = {"_userId":null,"_email":'{{ email }}','_cartsummary' : {'cart_id' : '{{ sessionId }}'}};
+    console.log(sareX_params.tag);
+
+    document.addEventListener('click', function(e){
+        if(e.srcElement.classList.contains('product_remove')){
+            const productId = e.srcElement.dataset.productId;
+            const execute_params = {'_userId': '', '_email' : '{{ email }}', '_cartdel' : {'country' : 'PL', 'language': 'pl', 'cart_id' : '{{ sessionId }}', 'product_id' : productId}};
+            console.log(execute_params);
+            sareX_core.execute(10, execute_params);
+        }
+    });
+
+    document.addEventListener('change', function(e){
+        if(e.srcElement.classList.contains('product_quantity')){
+            const quantity = e.srcElement.value;
+            const productId = e.srcElement.dataset.productId;
+            const execute_params = {'_userId': '', '_email' : '{{ email }}', '_cartquantity' : {'country' : 'PL', 'language': 'pl', 'cart_id' : '{{ sessionId }}', 'product_id' : productId, 'quantity' : quantity}};
+            console.log(execute_params);
+            sareX_core.execute(10, execute_params);
+        }
+    });
+</script>

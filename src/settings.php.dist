@@ -32,6 +32,9 @@ return [
         //Integrations
         'sarehub_pixel' => [
             'domain' => ''
+        ],
+        'sarehub_js' => [
+         'domain' => ''
         ]
     ],
 ];
