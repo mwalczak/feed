@@ -90,7 +90,7 @@ class AppController
         $args['products'] = ($this->settings['feed']['max_products_on_page'] && $args['productsCount'] > $this->settings['feed']['max_products_on_page']) ? array_slice($products, $offset, $this->settings['feed']['max_products_on_page']) : $products;
         $args['productsShow'] = count($args['products']);
 
-        return $this->render($response, 'other.twig', $args);
+        return $this->render($response, 'products.twig', $args);
     }
 
     public function productAction(Request $request, Response $response, array $args)

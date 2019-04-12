@@ -37,7 +37,7 @@ return [
          'domain' => ''
         ],
         'revhunter_js' => [
-            'other' => 0,
+            'products' => 0,
             'cart' => 0,
             'checkout' => 0,
             'product' => 0
