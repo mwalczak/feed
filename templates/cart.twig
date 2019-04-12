@@ -86,4 +86,7 @@
     {% if sarehub_js.domain %}
         {% include 'script/sarehub_js/cart.twig' %}
     {% endif %}
+    {% if revhunter_js.cart > 0 %}
+        {% include 'script/revhunter_js/cart.twig' %}
+    {% endif %}
 {% endblock %}

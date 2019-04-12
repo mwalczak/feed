@@ -44,4 +44,7 @@
     {% if sarehub_js.domain %}
         {% include 'script/sarehub_js/product.twig' %}
     {% endif %}
+    {% if revhunter_js.product > 0 %}
+        {% include 'script/revhunter_js/product.twig' %}
+    {% endif %}
 {% endblock %}

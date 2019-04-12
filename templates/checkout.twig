@@ -20,4 +20,7 @@
     {% if sarehub_js.domain %}
         {% include 'script/sarehub_js/checkout.twig' %}
     {% endif %}
+    {% if revhunter_js.checkout > 0 %}
+        {% include 'script/revhunter_js/checkout.twig' %}
+    {% endif %}
 {% endblock %}

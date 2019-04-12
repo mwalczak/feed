@@ -35,6 +35,12 @@ return [
         ],
         'sarehub_js' => [
          'domain' => ''
+        ],
+        'revhunter_js' => [
+            'other' => 0,
+            'cart' => 0,
+            'checkout' => 0,
+            'product' => 0
         ]
     ],
 ];
