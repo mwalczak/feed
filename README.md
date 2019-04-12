@@ -33,7 +33,7 @@ Paste your optional javascript in:
     
 ## Configure integrations:
 
-SAREhub tricking pixel
+SAREhub tracking pixel
 
     'sarehub_pixel' => [
         'domain' => 'example.com'
@@ -43,6 +43,21 @@ SAREhub tracking javascript
 
     'sarehub_js' => [
         'domain' => 'example.com'
+    ]
+    
+Revhunter tracking javascript
+
+    'revhunter_js' => [
+        'products' => 0,
+        'cart' => 0,
+        'checkout' => 0,
+        'product' => 0
+    ]
+    
+Facebook tracking pixel
+
+    'facebook_js' => [
+        'id' => ''
     ]
    
 ## Dev dependencies
