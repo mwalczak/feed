@@ -23,4 +23,7 @@
     {% if revhunter_js.checkout > 0 %}
         {% include 'script/revhunter_js/checkout.twig' %}
     {% endif %}
+    {% if facebook_js.id %}
+        {% include 'script/facebook_js/checkout.twig' %}
+    {% endif %}
 {% endblock %}

@@ -41,6 +41,9 @@ return [
             'cart' => 0,
             'checkout' => 0,
             'product' => 0
-        ]
+        ],
+         'facebook_js' => [
+             'id' => ''
+         ]
     ],
 ];

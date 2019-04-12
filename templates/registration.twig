@@ -23,4 +23,7 @@
     {% if sarehub_js.domain %}
         {% include 'script/sarehub_js/registration.twig' %}
     {% endif %}
+    {% if facebook_js.id %}
+        {% include 'script/facebook_js/registration.twig' %}
+    {% endif %}
 {% endblock %}

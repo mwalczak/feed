@@ -16,4 +16,7 @@
     {% if sarehub_js.domain %}
         {% include 'script/sarehub_js/payment.twig' %}
     {% endif %}
+    {% if facebook_js.id %}
+        {% include 'script/facebook_js/payment.twig' %}
+    {% endif %}
 {% endblock %}

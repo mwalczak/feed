@@ -48,6 +48,7 @@ class AppController
         $args['sarehub_pixel'] = $this->settings['sarehub_pixel'];
         $args['sarehub_js'] = $this->settings['sarehub_js'];
         $args['revhunter_js'] = $this->settings['revhunter_js'];
+        $args['facebook_js'] = $this->settings['facebook_js'];
     }
 
     private function render(Response $response, string $template, array $args)

@@ -89,4 +89,7 @@
     {% if revhunter_js.cart > 0 %}
         {% include 'script/revhunter_js/cart.twig' %}
     {% endif %}
+    {% if facebook_js.id %}
+        {% include 'script/facebook_js/cart.twig' %}
+    {% endif %}
 {% endblock %}

@@ -44,4 +44,7 @@
     {% if revhunter_js.other > 0 %}
         {% include 'script/revhunter_js/other.twig' %}
     {% endif %}
+    {% if facebook_js.id %}
+        {% include 'script/facebook_js/products.twig' %}
+    {% endif %}
 {% endblock %}
