@@ -3,7 +3,8 @@
     document.addEventListener('click', function(e){
         if(e.srcElement.classList.contains('add-to-cart')){
             fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_added_product&product_id={{ product.id }}&quantity=1',{
-                credentials: 'include'
+                credentials: 'include',
+                mode: 'no-cors'
             });
         }
     });

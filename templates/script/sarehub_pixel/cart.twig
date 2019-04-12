@@ -4,7 +4,8 @@
         if(e.srcElement.classList.contains('product_remove')){
             const productId = e.srcElement.dataset.productId;
             fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_removed_product&product_id='+productId,{
-                credentials: 'include'
+                credentials: 'include',
+                mode: 'no-cors'
             });
         }
     });
@@ -14,7 +15,8 @@
             const quantity = e.srcElement.value;
             const productId = e.srcElement.dataset.productId;
             fetch('https://api.sare25.com/collect?domain={{ sarehub_pixel.domain }}&email={{ email }}&cart_event=cart_changed_product_quantity&product_id='+productId+'&quantity='+quantity,{
-                credentials: 'include'
+                credentials: 'include',
+                mode: 'no-cors'
             });
         }
     });
