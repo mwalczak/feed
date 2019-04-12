@@ -60,6 +60,10 @@ To rebuild service workers use injectManifest mode:
     workbox injectManifest workbox-config.js
    
 ## What's new
+2019-04-12
+
+Facebook pixel and Revhunter integrations
+
 2019-04-11
 
 Opengraph (product meta) and SAREhub integrations
